@@ -33,7 +33,7 @@
     <div class="container hero-content">
       <span class="hero-kicker">Intranät</span>
       <h1 class="hero-title" style="font-size: clamp(30px, 4.6vw, 46px);">Boka lokal</h1>
-      <p class="hero-lede">Kolla lokalerna och kalendern nedan, klicka på en ledig tid och fyll i formuläret. Vi återkommer med bekräftelse.</p>
+      <p class="hero-lede">Välj vilken lokal du vill boka nedan för att se dess bokningar, klicka sedan på en ledig tid och fyll i formuläret.</p>
     </div>
   </section>
 
@@ -41,61 +41,66 @@
   <section class="section" style="padding-bottom: 12px;">
     <div class="container">
       <header class="section-head">
-        <p class="section-kicker">Lokalerna</p>
-        <h2>Det här går att boka</h2>
-        <p class="section-lede">En snabb översikt över husets lokaler. Bilder och mer information läggs till här efter hand.</p>
+        <p class="section-kicker">Steg 1</p>
+        <h2>Vilken lokal vill du boka?</h2>
+        <p class="section-lede">Klicka på en lokal för att se dess bokningar i kalendern nedan — så ser du själv om det är ledigt.</p>
       </header>
 
       <div class="card-grid">
-        <article class="card room-card">
+        <article class="card room-card" data-room="YMCA-Salen" tabindex="0" role="button" aria-pressed="false">
           <div class="card-icon">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18"/></svg>
           </div>
-          <h3>Stora salen</h3>
-          <p class="room-placeholder">Bild och innehåll läggs till här.</p>
+          <h3>YMCA-Salen</h3>
+          <p class="room-meta">Våning 1 · ca 150 stolar</p>
+          <p>Scenlokalen mitt i huset. Scen och plats för ca 150 stolar — bra som föreläsningssal eller när du behöver publik. Tar man undan stolarna finns fina ytor för fysiska aktiviteter.</p>
         </article>
 
-        <article class="card room-card">
+        <article class="card room-card" data-room="Salen" tabindex="0" role="button" aria-pressed="false">
           <div class="card-icon">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18"/></svg>
           </div>
-          <h3>Lilla salen</h3>
-          <p class="room-placeholder">Bild och innehåll läggs till här.</p>
+          <h3>Salen</h3>
+          <p class="room-meta">Våning 1, norra delen · ca 150 personer</p>
+          <p>Liten scen och möjlighet till projektor, samt bord och stolar. I hallen en trappa upp finns pingisbord och biljard.</p>
         </article>
 
-        <article class="card room-card">
-          <div class="card-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          </div>
-          <h3>Möteslokalen</h3>
-          <p class="room-placeholder">Bild och innehåll läggs till här.</p>
-        </article>
-
-        <article class="card room-card">
+        <article class="card room-card" data-room="Caféet" tabindex="0" role="button" aria-pressed="false">
           <div class="card-icon">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
           </div>
-          <h3>Köket</h3>
-          <p class="room-placeholder">Bild och innehåll läggs till här.</p>
+          <h3>Caféet</h3>
+          <p class="room-meta">ca 30 platser</p>
+          <p>Möjlighet till projektor. Ett större bord med plats för 10–15 personer passar perfekt för möte.</p>
         </article>
 
-        <article class="card room-card">
+        <article class="card room-card" data-room="RS-rummet" tabindex="0" role="button" aria-pressed="false">
           <div class="card-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V10"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           </div>
-          <h3>Hela huset</h3>
-          <p class="room-placeholder">Bild och innehåll läggs till här.</p>
+          <h3>RS-rummet</h3>
+          <p class="room-meta">Våning 2, endast trappa · ca 20 personer</p>
+          <p>Pentry samt bord och stolar. Perfekt för möten eller samlingar.</p>
+        </article>
+
+        <article class="card room-card" data-room="Gamla Kampsportssalen" tabindex="0" role="button" aria-pressed="false">
+          <div class="card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <h3>Gamla Kampsportssalen</h3>
+          <p class="room-meta">Våning 3, endast trappa</p>
+          <p>Mjuka mattor på golvet — bra för fysisk aktivitet, yoga, meditation eller annan verksamhet som behöver ett större rum.</p>
         </article>
       </div>
     </div>
   </section>
 
   <!-- ═══ KALENDER ═══ -->
-  <section class="section" style="padding-top: 12px; padding-bottom: 8px;">
+  <section class="section" id="fhCal" style="padding-top: 12px; padding-bottom: 8px;">
     <div class="container" style="max-width: 800px;">
       <header class="section-head">
-        <p class="section-kicker">Kalender</p>
-        <h2>Se när lokalen är bokad</h2>
+        <p class="section-kicker">Steg 2</p>
+        <h2>Bokningar för <span id="fhCalRoomLabel">vald lokal</span></h2>
         <p class="section-lede">Uppdateras automatiskt när vi lägger in nya bokningar. Klicka på en ledig tid för att förifylla formuläret nedan.</p>
       </header>
 
@@ -113,14 +118,18 @@
           <div id="fhCalGrid"></div>
         </div>
         <div class="fh-cal-pick-note" id="fhCalPickNote"></div>
-        <p class="fh-cal-legend">Bokningar visas med namn/förening och lokal. Klicka på en ledig tid för att komma igång med en bokningsförfrågan.</p>
+        <p class="fh-cal-legend">Bokningar visas med namn/förening. Klicka på en ledig tid för att komma igång med en bokningsförfrågan.</p>
       </div>
     </div>
   </section>
 
   <!-- ═══ FORMULÄR ═══ -->
-  <section class="section" style="padding-top: 8px;">
+  <section class="section is-hidden" id="fhBookingSection" style="padding-top: 8px;">
     <div class="container" style="max-width: 720px;">
+      <header class="section-head">
+        <p class="section-kicker">Steg 3</p>
+        <h2>Din bokningsförfrågan</h2>
+      </header>
       <div class="form-card">
 
         <div class="form-success" id="fhBookingSuccess">Din bokningsförfrågan öppnas nu i din e-postklient — skicka mejlet för att slutföra förfrågan.</div>
@@ -146,11 +155,11 @@
               <label for="fhRoom">Vilken lokal</label>
               <select id="fhRoom" name="fhRoom" required>
                 <option value="" disabled selected>Välj lokal</option>
-                <option value="Stora salen">Stora salen</option>
-                <option value="Lilla salen">Lilla salen</option>
-                <option value="Möteslokalen">Möteslokalen</option>
-                <option value="Köket">Köket</option>
-                <option value="Hela huset">Hela huset</option>
+                <option value="YMCA-Salen">YMCA-Salen</option>
+                <option value="Salen">Salen</option>
+                <option value="Caféet">Caféet</option>
+                <option value="RS-rummet">RS-rummet</option>
+                <option value="Gamla Kampsportssalen">Gamla Kampsportssalen</option>
                 <option value="Annat">Annat</option>
               </select>
             </div>
@@ -208,7 +217,7 @@
   <script src="js/booking.js"></script>
   <script>fhInitBookingForm();</script>
   <script src="js/calendar-config.js"></script>
-  <script src="js/calendar.js"></script>
+  <script src="js/calendar.js?v=6"></script>
   <script>fhInitCalendarWidget();</script>
 </body>
 </html>
