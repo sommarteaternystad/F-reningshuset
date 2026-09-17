@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Intranät — Föreningshuset</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..900;1,14..32,300..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=1">
+</head>
+<body>
+
+  <!-- ═══ NAV ═══ -->
+  <header class="site-nav">
+    <div class="container site-nav-inner">
+      <a href="index.html" class="nav-brand">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V10"/></svg>
+        <span>Föreningshuset<small>Intranät · För oss i huset</small></span>
+      </a>
+      <nav class="nav-pills-row" aria-label="Intranätnavigation">
+        <a href="index.html" class="nav-pill nav-pill--ghost">Hem</a>
+        <a href="intranat.html" class="nav-pill is-active">Intranät</a>
+        <a href="boka-lokal.html" class="nav-pill nav-pill--cta">Boka lokal</a>
+        <a href="#" class="nav-pill nav-pill--ghost" onclick="fhLogout(); return false;">Logga ut</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ═══ HEADER ═══ -->
+  <section class="hero-section" style="padding: 64px 0 52px;">
+    <div class="container hero-content">
+      <span class="hero-kicker">För oss i huset</span>
+      <h1 class="hero-title" style="font-size: clamp(30px, 4.6vw, 46px);">Välkommen in</h1>
+      <p class="hero-lede">Här samlar vi det som gäller för oss som verkar i huset — rutiner, regler och bokning av lokal.</p>
+      <div class="hero-actions">
+        <a href="boka-lokal.html" class="btn btn-amber">Boka lokal →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ BOKA LOKAL — STOR CTA ═══ -->
+  <section class="section" style="padding-bottom: 24px;">
+    <div class="container">
+      <article class="feature-tile">
+        <span class="feature-tile-tag">Det vi använder mest just nu</span>
+        <h3>Boka lokal</h3>
+        <p>Ska du eller din förening använda en lokal i huset? Skicka en bokningsförfrågan så återkommer vi med bekräftelse.</p>
+        <div class="hero-actions" style="justify-content:flex-start;">
+          <a href="boka-lokal.html" class="btn btn-amber">Gå till bokning →</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ═══ RUTINER ═══ -->
+  <section class="section on-soft" id="rutiner">
+    <div class="container">
+      <header class="section-head">
+        <p class="section-kicker">Rutiner</p>
+        <h2>Så fungerar vardagen i huset</h2>
+      </header>
+
+      <span class="placeholder-note">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+        Preliminära rutiner — fylls på och uppdateras av styrelsen.
+      </span>
+
+      <div class="rule-list">
+        <div class="rule-item">
+          <div class="num">1</div>
+          <div><h4>Lås huset efter dig</h4><p>Om du är sist ut ansvarar du för att alla dörrar och fönster är låsta.</p></div>
+        </div>
+        <div class="rule-item">
+          <div class="num">2</div>
+          <div><h4>Städa efter användning</h4><p>Lämna lokalen i samma skick som du hittade den — möbler tillbaka på plats, skräp i sopor.</p></div>
+        </div>
+        <div class="rule-item">
+          <div class="num">3</div>
+          <div><h4>Rapportera fel och skador</h4><p>Upptäcker du något trasigt eller som behöver lagas — hör av dig till styrelsen så snart som möjligt.</p></div>
+        </div>
+        <div class="rule-item">
+          <div class="num">4</div>
+          <div><h4>Nycklar och koder</h4><p>Nycklar hanteras via respektive förenings kontaktperson. Lämna inte ut koder till utomstående.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ REGLER ═══ -->
+  <section class="section" id="regler">
+    <div class="container">
+      <header class="section-head">
+        <p class="section-kicker">Regler</p>
+        <h2>Det här gäller för alla i huset</h2>
+      </header>
+
+      <span class="placeholder-note">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+        Preliminära regler — fylls på och uppdateras av styrelsen.
+      </span>
+
+      <div class="rule-list">
+        <div class="rule-item">
+          <div class="num">1</div>
+          <div><h4>Boka i förväg</h4><p>All användning av lokaler ska bokas via bokningsformuläret — även korta möten.</p></div>
+        </div>
+        <div class="rule-item">
+          <div class="num">2</div>
+          <div><h4>Visa hänsyn till andra föreningar</h4><p>Flera föreningar delar huset. Håll ljudnivå och tider inom din bokade tid.</p></div>
+        </div>
+        <div class="rule-item">
+          <div class="num">3</div>
+          <div><h4>Ingen alkohol utan tillstånd</h4><p>Alkohol förekommer endast vid godkända arrangemang med tillstånd från styrelsen.</p></div>
+        </div>
+        <div class="rule-item">
+          <div class="num">4</div>
+          <div><h4>Gäster är ditt ansvar</h4><p>Tar du med gäster till huset ansvarar du för att de följer husets rutiner och regler.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V10"/></svg>
+          <span>Föreningshuset<small>Intranät · För oss i huset</small></span>
+        </div>
+        <nav class="footer-nav" aria-label="Sidfotslänkar">
+          <a href="index.html">Hem</a>
+          <a href="intranat.html#rutiner">Rutiner</a>
+          <a href="intranat.html#regler">Regler</a>
+          <a href="boka-lokal.html">Boka lokal</a>
+          <a href="#" onclick="fhLogout(); return false;">Logga ut</a>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">Copyright &copy; 2026 Föreningshuset, Ystad. Alla rättigheter förbehållna.</p>
+        <p class="footer-sub">Endast för föreningar i huset</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/auth.js"></script>
+  <script>fhGuardPage();</script>
+</body>
+</html>
