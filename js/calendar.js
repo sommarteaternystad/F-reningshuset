@@ -13,6 +13,7 @@ var FH_CAL_MONTH_NAMES = ['jan', 'feb', 'mar', 'apr', 'maj', 'jun', 'jul', 'aug'
 var fhCalWeekStart = null;
 var fhCalRawEvents = [];
 var fhSelectedRoom = null;
+var fhCalHasError = false;
 
 /* Bokningarna i kalendern skrivs inte alltid likadant (olika personer
    skriver olika), så vi gissar lokal utifrån titel + plats. En bokning
@@ -326,6 +327,13 @@ function fhRenderForSelectedRoom() {
   var legend = document.querySelector('.fh-cal-legend');
   if (!grid) return;
 
+  if (fhCalHasError) {
+    grid.innerHTML = '';
+    if (wrap) wrap.style.display = 'none';
+    if (legend) legend.style.display = 'none';
+    return;
+  }
+
   if (!fhSelectedRoom) {
     grid.innerHTML = '';
     if (wrap) wrap.style.display = 'none';
@@ -395,7 +403,7 @@ function fhInitCalendarWidget() {
   fhInitRoomPicker();
 
   if (!FH_CALENDAR_API_KEY) {
-    statusEl.textContent = 'Kalendern är inte ansluten ännu. Hör av dig till styrelsen om lediga tider tills vidare.';
+    statusEl.textContent = 'Kalendern är inte ansluten ännu. Hör av dig till verksamhetsansvarig om lediga tider tills vidare.';
     statusEl.className = 'fh-cal-status is-error';
     return;
   }
@@ -412,10 +420,13 @@ function fhInitCalendarWidget() {
       weekEnd.setDate(weekEnd.getDate() + 7);
       var rawItems = await fhFetchCalendarEvents(fhCalWeekStart.toISOString(), weekEnd.toISOString());
       fhCalRawEvents = rawItems.map(fhNormalizeEvent);
+      fhCalHasError = false;
       fhRenderForSelectedRoom();
     } catch (err) {
-      statusEl.textContent = 'Kunde inte hämta kalendern just nu. Hör av dig till styrelsen om lediga tider tills vidare.';
+      fhCalHasError = true;
+      statusEl.textContent = 'Kunde inte hämta kalendern just nu. Hör av dig till verksamhetsansvarig om lediga tider tills vidare.';
       statusEl.className = 'fh-cal-status is-error';
+      fhRenderForSelectedRoom();
     }
   }
 
