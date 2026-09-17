@@ -11,13 +11,13 @@
   --muted-2: rgba(27, 32, 29, 0.5);
 
   /* Brand */
-  --teal: #1f5f4a;
-  --teal-light: #2f7d63;
-  --teal-deep: #0f2f24;
+  --blue: #2f6f9e;
+  --blue-light: #4f93c7;
+  --blue-deep: #143145;
   --amber: #d9a441;
   --amber-light: #eac06a;
-  --dark: #0d1512;
-  --dark-2: #142019;
+  --dark: #0b1520;
+  --dark-2: #13212f;
 
   --max: 1160px;
   --radius-lg: 28px;
@@ -68,7 +68,7 @@ img { display: block; max-width: 100%; }
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(13, 21, 18, 0.86);
+  background: rgba(11, 21, 32, 0.86);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid rgba(255,255,255,0.07);
@@ -137,7 +137,7 @@ img { display: block; max-width: 100%; }
 }
 
 .nav-pill.is-active {
-  background: linear-gradient(135deg, var(--teal-light) 0%, var(--teal) 100%);
+  background: linear-gradient(135deg, var(--blue-light) 0%, var(--blue) 100%);
   border-color: rgba(255,255,255,0.20);
   color: #fff;
 }
@@ -174,7 +174,7 @@ img { display: block; max-width: 100%; }
   padding: 96px 0 84px;
   background:
     radial-gradient(ellipse 900px 500px at 80% -10%, rgba(217,164,65,0.16) 0%, transparent 60%),
-    linear-gradient(160deg, var(--dark) 0%, var(--dark-2) 45%, var(--teal-deep) 100%);
+    linear-gradient(160deg, var(--dark) 0%, var(--dark-2) 45%, var(--blue-deep) 100%);
   overflow: hidden;
 }
 
@@ -203,11 +203,11 @@ img { display: block; max-width: 100%; }
   height: 76px;
   margin: 0 auto 26px;
   border-radius: 22px;
-  background: linear-gradient(135deg, var(--teal-light) 0%, var(--teal) 100%);
+  background: linear-gradient(135deg, var(--blue-light) 0%, var(--blue) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 14px 40px rgba(31, 95, 74, 0.45), inset 0 1px 0 rgba(255,255,255,0.18);
+  box-shadow: 0 14px 40px rgba(47, 111, 158, 0.45), inset 0 1px 0 rgba(255,255,255,0.18);
 }
 
 .hero-kicker {
@@ -259,7 +259,7 @@ img { display: block; max-width: 100%; }
   letter-spacing: 0.14em;
   font-size: 12px;
   font-weight: 800;
-  color: var(--teal);
+  color: var(--blue);
 }
 
 h2 {
@@ -307,8 +307,8 @@ h2 {
   width: 46px;
   height: 46px;
   border-radius: 13px;
-  background: rgba(31, 95, 74, 0.10);
-  color: var(--teal);
+  background: rgba(47, 111, 158, 0.10);
+  color: var(--blue);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -334,7 +334,7 @@ h2 {
   border-radius: var(--radius-lg);
   overflow: hidden;
   position: relative;
-  background: linear-gradient(150deg, var(--dark) 0%, var(--teal-deep) 100%);
+  background: linear-gradient(150deg, var(--dark) 0%, var(--blue-deep) 100%);
   padding: 48px;
   display: flex;
   flex-direction: column;
@@ -403,14 +403,14 @@ h2 {
   box-shadow: 0 8px 24px rgba(217, 164, 65, 0.40);
 }
 
-.btn-teal {
-  background: var(--teal);
+.btn-blue {
+  background: var(--blue);
   color: #fff;
 }
-.btn-teal:hover {
-  background: var(--teal-light);
+.btn-blue:hover {
+  background: var(--blue-light);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(31, 95, 74, 0.40);
+  box-shadow: 0 8px 24px rgba(47, 111, 158, 0.40);
 }
 
 .btn-ghost {
@@ -430,8 +430,8 @@ h2 {
   color: var(--text);
 }
 .btn-outline:hover {
-  border-color: var(--teal);
-  color: var(--teal);
+  border-color: var(--blue);
+  color: var(--blue);
 }
 
 .btn-block { width: 100%; }
@@ -448,7 +448,7 @@ h2 {
   padding: 60px 16px;
   background:
     radial-gradient(ellipse 900px 500px at 20% 0%, rgba(217,164,65,0.10) 0%, transparent 60%),
-    linear-gradient(160deg, var(--dark) 0%, var(--dark-2) 45%, var(--teal-deep) 100%);
+    linear-gradient(160deg, var(--dark) 0%, var(--dark-2) 45%, var(--blue-deep) 100%);
 }
 
 .auth-card {
@@ -467,7 +467,7 @@ h2 {
   height: 60px;
   margin: 0 auto 22px;
   border-radius: 18px;
-  background: linear-gradient(135deg, var(--teal-light) 0%, var(--teal) 100%);
+  background: linear-gradient(135deg, var(--blue-light) 0%, var(--blue) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -578,24 +578,24 @@ h2 {
 }
 
 .room-card:hover {
-  border-color: var(--teal);
+  border-color: var(--blue);
 }
 
 .room-card:focus-visible {
-  outline: 2px solid var(--teal);
+  outline: 2px solid var(--blue);
   outline-offset: 2px;
 }
 
 .room-card.is-selected {
-  border-color: var(--teal);
-  background: rgba(31, 95, 74, 0.05);
-  box-shadow: 0 0 0 2px var(--teal), var(--shadow);
+  border-color: var(--blue);
+  background: rgba(47, 111, 158, 0.05);
+  box-shadow: 0 0 0 2px var(--blue), var(--shadow);
 }
 
 .room-card .room-meta {
   font-size: 12.5px;
   font-weight: 700;
-  color: var(--teal);
+  color: var(--blue);
   margin: -4px 0 10px;
 }
 
@@ -661,7 +661,7 @@ h2 {
   border-radius: 999px;
   border: 1px solid var(--line);
   background: #fff;
-  color: var(--teal);
+  color: var(--blue);
   cursor: pointer;
   transition: background 0.2s;
   font-family: inherit;
@@ -693,7 +693,7 @@ h2 {
   text-align: center;
   border-bottom: 2px solid var(--line);
 }
-.fh-cal-day-head.is-today { color: var(--teal); }
+.fh-cal-day-head.is-today { color: var(--blue); }
 
 .fh-cal-day-name {
   display: block;
@@ -703,7 +703,7 @@ h2 {
   letter-spacing: 0.06em;
   color: var(--muted-2);
 }
-.fh-cal-day-head.is-today .fh-cal-day-name { color: var(--teal); }
+.fh-cal-day-head.is-today .fh-cal-day-name { color: var(--blue); }
 
 .fh-cal-day-num {
   display: block;
@@ -737,20 +737,20 @@ h2 {
   cursor: pointer;
   transition: background 0.15s;
 }
-.fh-cal-hour-cell:hover { background: rgba(31, 95, 74, 0.07); }
+.fh-cal-hour-cell:hover { background: rgba(47, 111, 158, 0.07); }
 
 .fh-cal-event {
   position: absolute;
   left: 3px;
   right: 3px;
   border-radius: 8px;
-  background: linear-gradient(135deg, var(--teal-light), var(--teal));
+  background: linear-gradient(135deg, var(--blue-light), var(--blue));
   color: #fff;
   padding: 4px 6px;
   font-size: 11px;
   line-height: 1.25;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(31, 95, 74, 0.25);
+  box-shadow: 0 2px 8px rgba(47, 111, 158, 0.25);
   display: flex;
   flex-direction: column;
   gap: 1px;
@@ -788,9 +788,9 @@ h2 {
   margin-top: 14px;
   font-size: 13px;
   font-weight: 700;
-  color: var(--teal);
-  background: rgba(31, 95, 74, 0.08);
-  border: 1px solid rgba(31, 95, 74, 0.18);
+  color: var(--blue);
+  background: rgba(47, 111, 158, 0.08);
+  border: 1px solid rgba(47, 111, 158, 0.18);
   padding: 10px 14px;
   border-radius: 12px;
 }
@@ -831,7 +831,7 @@ h2 {
 .form-card .field input:focus,
 .form-card .field select:focus,
 .form-card .field textarea:focus {
-  border-color: var(--teal);
+  border-color: var(--blue);
   background: #fff;
 }
 
@@ -852,9 +852,9 @@ h2 {
 
 .form-success {
   display: none;
-  background: rgba(31, 95, 74, 0.10);
-  border: 1px solid rgba(31, 95, 74, 0.25);
-  color: var(--teal);
+  background: rgba(47, 111, 158, 0.10);
+  border: 1px solid rgba(47, 111, 158, 0.25);
+  color: var(--blue);
   font-weight: 700;
   font-size: 14px;
   padding: 14px 18px;
@@ -887,8 +887,8 @@ h2 {
   width: 32px;
   height: 32px;
   border-radius: 10px;
-  background: rgba(31, 95, 74, 0.10);
-  color: var(--teal);
+  background: rgba(47, 111, 158, 0.10);
+  color: var(--blue);
   font-weight: 800;
   font-size: 13px;
   display: flex;
@@ -928,7 +928,7 @@ h2 {
 ══════════════════════════════════════════════ */
 
 .site-footer {
-  background: linear-gradient(160deg, var(--dark) 0%, var(--dark-2) 60%, #08100c 100%);
+  background: linear-gradient(160deg, var(--dark) 0%, var(--dark-2) 60%, #050c15 100%);
   color: #fff;
   padding: 56px 0 28px;
 }
