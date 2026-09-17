@@ -338,8 +338,6 @@ function fhRenderForSelectedRoom() {
     grid.innerHTML = '';
     if (wrap) wrap.style.display = 'none';
     if (legend) legend.style.display = 'none';
-    statusEl.textContent = 'Välj en lokal ovan för att se bokningar och lediga tider.';
-    statusEl.className = 'fh-cal-status';
     return;
   }
 
@@ -375,7 +373,10 @@ function fhSelectRoom(roomId) {
   fhRenderForSelectedRoom();
 
   var calSection = document.getElementById('fhCal');
-  if (calSection) calSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  if (calSection) {
+    calSection.classList.remove('is-hidden');
+    calSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 }
 
 function fhInitRoomPicker() {
