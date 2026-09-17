@@ -165,14 +165,19 @@
             </div>
           </div>
 
+          <div class="field">
+            <label for="fhDate">Datum</label>
+            <input type="date" id="fhDate" name="fhDate" required>
+          </div>
+
           <div class="form-row">
             <div class="field">
-              <label for="fhDate">Datum</label>
-              <input type="date" id="fhDate" name="fhDate" required>
+              <label for="fhTimeStart">Starttid</label>
+              <input type="time" id="fhTimeStart" name="fhTimeStart" required>
             </div>
             <div class="field">
-              <label for="fhTime">Tid</label>
-              <input type="text" id="fhTime" name="fhTime" placeholder="t.ex. 18:00–21:00">
+              <label for="fhTimeEnd">Sluttid</label>
+              <input type="time" id="fhTimeEnd" name="fhTimeEnd" required>
             </div>
           </div>
 
@@ -214,10 +219,10 @@
 
   <script src="js/auth.js"></script>
   <script>fhGuardPage();</script>
-  <script src="js/booking.js?v=2"></script>
+  <script src="js/booking.js?v=3"></script>
   <script>fhInitBookingForm();</script>
   <script src="js/calendar-config.js"></script>
-  <script src="js/calendar.js?v=8"></script>
+  <script src="js/calendar.js?v=9"></script>
   <script>fhInitCalendarWidget();</script>
 </body>
 </html>

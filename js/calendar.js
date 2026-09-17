@@ -291,8 +291,9 @@ function fhRenderEvents(dayColumnEls, normalizedEvents) {
 
 function fhHandleSlotClick(date, hour) {
   var dateInput = document.getElementById('fhDate');
-  var timeInput = document.getElementById('fhTime');
-  if (!dateInput || !timeInput) return;
+  var startInput = document.getElementById('fhTimeStart');
+  var endInput = document.getElementById('fhTimeEnd');
+  if (!dateInput || !startInput || !endInput) return;
 
   var yyyy = date.getFullYear();
   var mm = String(date.getMonth() + 1).padStart(2, '0');
@@ -300,11 +301,14 @@ function fhHandleSlotClick(date, hour) {
   dateInput.value = yyyy + '-' + mm + '-' + dd;
 
   var endHour = Math.min(hour + 2, FH_CAL_END_HOUR);
-  timeInput.value = String(hour).padStart(2, '0') + ':00–' + String(endHour).padStart(2, '0') + ':00';
+  var startStr = String(hour).padStart(2, '0') + ':00';
+  var endStr = String(endHour).padStart(2, '0') + ':00';
+  startInput.value = startStr;
+  endInput.value = endStr;
 
   var note = document.getElementById('fhCalPickNote');
   if (note) {
-    note.textContent = 'Vald tid: ' + dd + '/' + mm + ' kl ' + timeInput.value + ' — fortsätt i formuläret nedan.';
+    note.textContent = 'Vald tid: ' + dd + '/' + mm + ' kl ' + startStr + '–' + endStr + ' — fortsätt i formuläret nedan.';
     note.classList.add('show');
   }
 
