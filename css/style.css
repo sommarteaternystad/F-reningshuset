@@ -560,25 +560,211 @@ h2 {
 }
 .auth-back:hover { color: rgba(255,255,255,0.75); }
 
-/* Google Calendar embed (boka lokal) */
-.calendar-embed {
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  border: 1px solid var(--line);
-  box-shadow: var(--shadow);
-  background: #fff;
-  line-height: 0;
+/* ══════════════════════════════════════════════
+   LOKAL-VISARE (rums-kort)
+══════════════════════════════════════════════ */
+
+.room-card p.room-placeholder {
+  font-size: 13px;
+  color: var(--muted-2);
+  font-style: italic;
 }
 
-.calendar-embed iframe {
+/* ══════════════════════════════════════════════
+   EGEN KALENDERVISARE (boka lokal)
+══════════════════════════════════════════════ */
+
+.fh-cal {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: 22px;
+}
+
+.fh-cal-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.fh-cal-toolbar-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.fh-cal-nav-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--bg-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  cursor: pointer;
+  transition: background 0.2s;
+  font-family: inherit;
+  font-size: 16px;
+}
+.fh-cal-nav-btn:hover { background: #ececea; }
+
+.fh-cal-range {
+  font-weight: 800;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+  min-width: 150px;
+}
+
+.fh-cal-today-btn {
+  font-size: 12.5px;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--teal);
+  cursor: pointer;
+  transition: background 0.2s;
+  font-family: inherit;
+}
+.fh-cal-today-btn:hover { background: var(--bg-soft); }
+
+.fh-cal-status {
+  font-size: 13px;
+  color: var(--muted-2);
+  margin-bottom: 10px;
+  min-height: 18px;
+}
+.fh-cal-status.is-error { color: #b3413f; }
+
+.fh-cal-scroll {
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.fh-cal-table { min-width: 720px; }
+
+.fh-cal-header-row {
+  display: grid;
+  grid-template-columns: 48px repeat(7, 1fr);
+}
+
+.fh-cal-day-head {
+  padding: 6px 4px 10px;
+  text-align: center;
+  border-bottom: 2px solid var(--line);
+}
+.fh-cal-day-head.is-today { color: var(--teal); }
+
+.fh-cal-day-name {
   display: block;
-  width: 100%;
-  height: 600px;
-  border: 0;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted-2);
+}
+.fh-cal-day-head.is-today .fh-cal-day-name { color: var(--teal); }
+
+.fh-cal-day-num {
+  display: block;
+  font-size: 17px;
+  font-weight: 800;
+  margin-top: 2px;
+}
+
+.fh-cal-body {
+  display: grid;
+  grid-template-columns: 48px repeat(7, 1fr);
+}
+
+.fh-cal-hour-label {
+  font-size: 10.5px;
+  color: var(--muted-2);
+  text-align: right;
+  padding-right: 8px;
+  box-sizing: border-box;
+  transform: translateY(-6px);
+}
+
+.fh-cal-day-col {
+  position: relative;
+  border-left: 1px solid var(--line);
+}
+
+.fh-cal-hour-cell {
+  border-bottom: 1px solid var(--line);
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.fh-cal-hour-cell:hover { background: rgba(31, 95, 74, 0.07); }
+
+.fh-cal-event {
+  position: absolute;
+  left: 3px;
+  right: 3px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--teal-light), var(--teal));
+  color: #fff;
+  padding: 4px 6px;
+  font-size: 11px;
+  line-height: 1.25;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(31, 95, 74, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  pointer-events: none;
+}
+
+.fh-cal-event--allday {
+  background: linear-gradient(135deg, var(--amber-light), var(--amber));
+  color: #241505;
+}
+
+.fh-cal-event-title {
+  font-weight: 800;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.fh-cal-event-loc {
+  opacity: 0.85;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 10px;
+}
+.fh-cal-event-time { opacity: 0.75; font-size: 10px; }
+
+.fh-cal-pick-note {
+  display: none;
+  margin-top: 14px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--teal);
+  background: rgba(31, 95, 74, 0.08);
+  border: 1px solid rgba(31, 95, 74, 0.18);
+  padding: 10px 14px;
+  border-radius: 12px;
+}
+.fh-cal-pick-note.show { display: block; }
+
+.fh-cal-legend {
+  margin-top: 14px;
+  font-size: 12.5px;
+  color: var(--muted-2);
 }
 
 @media (max-width: 640px) {
-  .calendar-embed iframe { height: 480px; }
+  .fh-cal { padding: 16px; }
 }
 
 /* Light form variant (booking page on white background) */
