@@ -1,30 +1,40 @@
 /* ══════════════════════════════════════════════
    FÖRENINGSHUSET — style.css
+   Paletten är hämtad direkt ur loggans ikonrutor
+   (teater, dans, musik, folk, basket, kaffe) —
+   ljus, luftig bas istället för mörk hero, så
+   loggan får vit botten naturligt utan platta.
 ══════════════════════════════════════════════ */
 
 :root {
   --bg: #ffffff;
-  --bg-soft: #f6f4ef;
-  --line: rgba(20, 20, 20, 0.08);
-  --text: #1b201d;
-  --muted: rgba(27, 32, 29, 0.72);
-  --muted-2: rgba(27, 32, 29, 0.5);
+  --bg-soft: #f6f7f8;
+  --line: rgba(20, 22, 25, 0.09);
+  --text: #1c2126;
+  --muted: rgba(28, 33, 38, 0.68);
+  --muted-2: rgba(28, 33, 38, 0.48);
 
-  /* Brand */
-  --blue: #2f6f9e;
-  --blue-light: #4f93c7;
-  --blue-deep: #143145;
-  --amber: #d9a441;
-  --amber-light: #eac06a;
-  --dark: #0b1520;
-  --dark-2: #13212f;
+  /* Brand — ur loggans ikonrutor */
+  --primary: #0f7688;        /* teater (teal), djupare för text/knappar */
+  --primary-light: #1593a6;  /* teater (teal), som i loggan */
+  --primary-soft: rgba(15, 118, 136, 0.10);
+
+  --amber: #eda23f;          /* dans (orange) */
+  --amber-light: #f4bf72;
+
+  --coral: #d9636f;          /* musik (korall) */
+  --coral-light: #e8828c;
+
+  --lavender: #8d84a1;       /* gemenskap (lila) */
+  --green: #7fac68;          /* rörelse (grön) */
+  --sky: #5f9dc4;            /* fika (blå) */
 
   --max: 1160px;
   --radius-lg: 28px;
   --radius-md: 20px;
   --radius-sm: 14px;
   --shadow: 0 18px 50px rgba(0, 0, 0, 0.06);
-  --shadow-dark: 0 12px 40px rgba(0, 0, 0, 0.22);
+  --shadow-dark: 0 16px 40px rgba(15, 118, 136, 0.18);
 }
 
 *, *::before, *::after {
@@ -61,17 +71,17 @@ img { display: block; max-width: 100%; }
 }
 
 /* ══════════════════════════════════════════════
-   TOP NAV
+   TOP NAV — ljus, loggan vilar direkt på den
 ══════════════════════════════════════════════ */
 
 .site-nav {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(11, 21, 32, 0.86);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid rgba(255,255,255,0.07);
+  border-bottom: 1px solid var(--line);
 }
 
 .site-nav-inner {
@@ -79,7 +89,7 @@ img { display: block; max-width: 100%; }
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  min-height: 72px;
+  min-height: 76px;
   padding: 10px 0;
 }
 
@@ -90,25 +100,25 @@ img { display: block; max-width: 100%; }
   font-weight: 800;
   font-size: 17px;
   letter-spacing: -0.02em;
-  color: #fff;
+  color: var(--text);
   flex-shrink: 0;
 }
 
-.nav-brand svg { flex-shrink: 0; color: var(--amber); }
+.nav-brand svg { flex-shrink: 0; color: var(--primary); }
 
+/* Loggan vilar direkt på den ljusa navbaren — ingen platta behövs.
+   Klassen finns kvar i HTML men görs osynlig här av flit. */
 .brand-logo-plate {
   display: inline-flex;
   align-items: center;
-  background: #fff;
-  border-radius: 10px;
-  padding: 6px 14px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+  background: transparent;
+  padding: 0;
   flex-shrink: 0;
 }
 
 .brand-logo {
   display: block;
-  height: 42px;
+  height: 52px;
   width: auto;
 }
 
@@ -117,7 +127,7 @@ img { display: block; max-width: 100%; }
   font-weight: 700;
   letter-spacing: 0.10em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.42);
+  color: var(--muted-2);
 }
 
 .nav-brand small {
@@ -126,7 +136,7 @@ img { display: block; max-width: 100%; }
   font-weight: 600;
   letter-spacing: 0.10em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.38);
+  color: var(--muted-2);
   margin-top: 1px;
 }
 
@@ -144,61 +154,60 @@ img { display: block; max-width: 100%; }
   min-height: 42px;
   padding: 0 20px;
   border-radius: 999px;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.16);
-  color: rgba(255,255,255,0.85);
+  background: var(--bg-soft);
+  border: 1px solid var(--line);
+  color: var(--muted);
   font-size: 13.5px;
   font-weight: 700;
   letter-spacing: -0.01em;
-  transition: background 0.2s, border-color 0.2s, transform 0.18s, box-shadow 0.18s;
+  transition: background 0.2s, border-color 0.2s, transform 0.18s, box-shadow 0.18s, color 0.2s;
   white-space: nowrap;
 }
 
 .nav-pill:hover {
-  background: rgba(255,255,255,0.14);
+  background: #ececee;
   transform: translateY(-2px);
-  color: #fff;
+  color: var(--text);
 }
 
 .nav-pill.is-active {
-  background: linear-gradient(135deg, var(--blue-light) 0%, var(--blue) 100%);
-  border-color: rgba(255,255,255,0.20);
+  background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+  border-color: transparent;
   color: #fff;
 }
 
 .nav-pill--cta {
-  background: linear-gradient(135deg, var(--amber) 0%, #c1872f 100%);
+  background: linear-gradient(135deg, var(--amber) 0%, #d98a28 100%);
   border-color: transparent;
-  color: #241505;
+  color: #2b1804;
 }
 
 .nav-pill--cta:hover {
   background: linear-gradient(135deg, var(--amber-light) 0%, var(--amber) 100%);
-  color: #241505;
+  color: #2b1804;
 }
 
 .nav-pill--ghost {
   background: transparent;
-  border-color: rgba(255,255,255,0.14);
-  color: rgba(255,255,255,0.55);
+  border-color: var(--line);
+  color: var(--muted-2);
 }
 
 @media (max-width: 720px) {
   .site-nav-inner { flex-wrap: wrap; min-height: unset; padding: 14px 0; gap: 12px; }
   .nav-pills-row { width: 100%; justify-content: flex-start; }
   .nav-pill { min-height: 36px; padding: 0 14px; font-size: 12.5px; }
+  .brand-logo { height: 40px; }
 }
 
 /* ══════════════════════════════════════════════
-   HERO
+   HERO — ljus, med mjuka färgklickar i loggans toner
 ══════════════════════════════════════════════ */
 
 .hero-section {
   position: relative;
-  padding: 96px 0 84px;
-  background:
-    radial-gradient(ellipse 900px 500px at 80% -10%, rgba(217,164,65,0.16) 0%, transparent 60%),
-    linear-gradient(160deg, var(--dark) 0%, var(--dark-2) 45%, var(--blue-deep) 100%);
+  padding: 80px 0 76px;
+  background: var(--bg);
   overflow: hidden;
 }
 
@@ -206,11 +215,10 @@ img { display: block; max-width: 100%; }
   content: '';
   position: absolute;
   inset: 0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
-  background-size: 42px 42px;
-  mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, black 0%, transparent 75%);
+  background:
+    radial-gradient(480px 380px at 8% 0%, rgba(15, 118, 136, 0.14) 0%, transparent 65%),
+    radial-gradient(520px 420px at 95% 10%, rgba(217, 99, 111, 0.12) 0%, transparent 65%),
+    radial-gradient(420px 340px at 50% 100%, rgba(237, 162, 63, 0.10) 0%, transparent 65%);
   pointer-events: none;
 }
 
@@ -222,16 +230,27 @@ img { display: block; max-width: 100%; }
   margin: 0 auto;
 }
 
+.hero-logo-wrap {
+  margin: 0 auto 22px;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-logo-img {
+  height: clamp(76px, 12vw, 128px);
+  width: auto;
+}
+
 .hero-icon {
   width: 76px;
   height: 76px;
   margin: 0 auto 26px;
   border-radius: 22px;
-  background: linear-gradient(135deg, var(--blue-light) 0%, var(--blue) 100%);
+  background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 14px 40px rgba(47, 111, 158, 0.45), inset 0 1px 0 rgba(255,255,255,0.18);
+  box-shadow: 0 14px 40px rgba(15, 118, 136, 0.30), inset 0 1px 0 rgba(255,255,255,0.18);
 }
 
 .hero-kicker {
@@ -240,7 +259,7 @@ img { display: block; max-width: 100%; }
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--amber-light);
+  color: var(--coral);
   margin-bottom: 16px;
 }
 
@@ -249,13 +268,13 @@ img { display: block; max-width: 100%; }
   font-weight: 900;
   letter-spacing: -0.035em;
   line-height: 1.02;
-  color: #ffffff;
+  color: var(--text);
   margin: 0 0 18px;
 }
 
 .hero-lede {
   font-size: clamp(15px, 1.6vw, 18px);
-  color: rgba(255,255,255,0.62);
+  color: var(--muted);
   line-height: 1.7;
   max-width: 560px;
   margin: 0 auto 36px;
@@ -283,7 +302,7 @@ img { display: block; max-width: 100%; }
   letter-spacing: 0.14em;
   font-size: 12px;
   font-weight: 800;
-  color: var(--blue);
+  color: var(--primary);
 }
 
 h2 {
@@ -331,13 +350,19 @@ h2 {
   width: 46px;
   height: 46px;
   border-radius: 13px;
-  background: rgba(47, 111, 158, 0.10);
-  color: var(--blue);
+  background: var(--primary-soft);
+  color: var(--primary);
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 18px;
 }
+
+.card-icon--orange { background: rgba(237, 162, 63, 0.16); color: #b6791f; }
+.card-icon--coral { background: rgba(217, 99, 111, 0.14); color: var(--coral); }
+.card-icon--lavender { background: rgba(141, 132, 161, 0.16); color: var(--lavender); }
+.card-icon--green { background: rgba(127, 172, 104, 0.16); color: var(--green); }
+.card-icon--sky { background: rgba(95, 157, 196, 0.16); color: var(--sky); }
 
 .card h3 {
   margin: 0 0 10px;
@@ -353,12 +378,12 @@ h2 {
   line-height: 1.65;
 }
 
-/* Dark feature tile (för oss i huset / boka lokal callouts) */
+/* Färgstark feature-platta (för oss i huset / boka lokal) */
 .feature-tile {
   border-radius: var(--radius-lg);
   overflow: hidden;
   position: relative;
-  background: linear-gradient(150deg, var(--dark) 0%, var(--blue-deep) 100%);
+  background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
   padding: 48px;
   display: flex;
   flex-direction: column;
@@ -373,8 +398,8 @@ h2 {
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  color: var(--amber-light);
-  background: rgba(217,164,65,0.14);
+  color: #fff;
+  background: rgba(255,255,255,0.20);
   padding: 6px 14px;
   border-radius: 999px;
 }
@@ -389,7 +414,7 @@ h2 {
 
 .feature-tile p {
   margin: 0;
-  color: rgba(255,255,255,0.62);
+  color: rgba(255,255,255,0.85);
   font-size: 15px;
   line-height: 1.7;
   max-width: 520px;
@@ -419,32 +444,33 @@ h2 {
 
 .btn-amber {
   background: var(--amber);
-  color: #241505;
+  color: #2b1804;
 }
 .btn-amber:hover {
   background: var(--amber-light);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(217, 164, 65, 0.40);
+  box-shadow: 0 8px 24px rgba(237, 162, 63, 0.40);
 }
 
 .btn-blue {
-  background: var(--blue);
+  background: var(--primary);
   color: #fff;
 }
 .btn-blue:hover {
-  background: var(--blue-light);
+  background: var(--primary-light);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(47, 111, 158, 0.40);
+  box-shadow: 0 8px 24px rgba(15, 118, 136, 0.35);
 }
 
 .btn-ghost {
-  background: rgba(255, 255, 255, 0.10);
-  border: 1.5px solid rgba(255, 255, 255, 0.24);
-  color: #ffffff;
-  backdrop-filter: blur(10px);
+  background: #fff;
+  border: 1.5px solid var(--line);
+  color: var(--text);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.04);
 }
 .btn-ghost:hover {
-  background: rgba(255, 255, 255, 0.18);
+  border-color: var(--primary);
+  color: var(--primary);
   transform: translateY(-2px);
 }
 
@@ -454,8 +480,8 @@ h2 {
   color: var(--text);
 }
 .btn-outline:hover {
-  border-color: var(--blue);
-  color: var(--blue);
+  border-color: var(--primary);
+  color: var(--primary);
 }
 
 .btn-block { width: 100%; }
@@ -465,24 +491,25 @@ h2 {
 ══════════════════════════════════════════════ */
 
 .auth-wrap {
-  min-height: calc(100vh - 72px);
+  min-height: calc(100vh - 76px);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 60px 16px;
   background:
-    radial-gradient(ellipse 900px 500px at 20% 0%, rgba(217,164,65,0.10) 0%, transparent 60%),
-    linear-gradient(160deg, var(--dark) 0%, var(--dark-2) 45%, var(--blue-deep) 100%);
+    radial-gradient(480px 380px at 10% 0%, rgba(15, 118, 136, 0.10) 0%, transparent 65%),
+    radial-gradient(480px 380px at 90% 100%, rgba(217, 99, 111, 0.10) 0%, transparent 65%),
+    var(--bg-soft);
 }
 
 .auth-card {
   width: 100%;
   max-width: 420px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.10);
+  background: #fff;
+  border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   padding: 44px 38px;
-  backdrop-filter: blur(16px);
+  box-shadow: var(--shadow);
   text-align: center;
 }
 
@@ -491,23 +518,23 @@ h2 {
   height: 60px;
   margin: 0 auto 22px;
   border-radius: 18px;
-  background: linear-gradient(135deg, var(--blue-light) 0%, var(--blue) 100%);
+  background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 14px 34px rgba(31,95,74,0.45);
+  box-shadow: 0 14px 34px rgba(15, 118, 136, 0.35);
 }
 
 .auth-card h1 {
   font-size: 24px;
   font-weight: 900;
   letter-spacing: -0.02em;
-  color: #fff;
+  color: var(--text);
   margin: 0 0 8px;
 }
 
 .auth-card p.auth-lede {
-  color: rgba(255,255,255,0.55);
+  color: var(--muted);
   font-size: 14px;
   line-height: 1.6;
   margin: 0 0 28px;
@@ -522,7 +549,7 @@ h2 {
   display: block;
   font-size: 12.5px;
   font-weight: 700;
-  color: rgba(255,255,255,0.55);
+  color: var(--muted-2);
   margin-bottom: 8px;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -535,9 +562,9 @@ h2 {
   min-height: 48px;
   padding: 0 16px;
   border-radius: 12px;
-  border: 1.5px solid rgba(255,255,255,0.14);
-  background: rgba(255,255,255,0.06);
-  color: #fff;
+  border: 1.5px solid var(--line);
+  background: var(--bg-soft);
+  color: var(--text);
   font-size: 15px;
   font-family: inherit;
   transition: border-color 0.2s, background 0.2s;
@@ -550,23 +577,23 @@ h2 {
 }
 
 .field input::placeholder,
-.field textarea::placeholder { color: rgba(255,255,255,0.30); }
+.field textarea::placeholder { color: var(--muted-2); }
 
 .field input:focus,
 .field select:focus,
 .field textarea:focus {
   outline: none;
-  border-color: var(--amber);
-  background: rgba(255,255,255,0.09);
+  border-color: var(--primary);
+  background: #fff;
 }
 
-.field select option { background: var(--dark-2); color: #fff; }
+.field select option { background: #fff; color: var(--text); }
 
 .auth-error {
   display: none;
-  background: rgba(210, 70, 70, 0.14);
-  border: 1px solid rgba(210, 70, 70, 0.30);
-  color: #ffb3b3;
+  background: rgba(217, 99, 111, 0.12);
+  border: 1px solid rgba(217, 99, 111, 0.30);
+  color: #a83e4a;
   font-size: 13.5px;
   font-weight: 600;
   padding: 10px 14px;
@@ -581,10 +608,10 @@ h2 {
   display: block;
   margin-top: 22px;
   font-size: 13.5px;
-  color: rgba(255,255,255,0.40);
+  color: var(--muted-2);
   transition: color 0.2s;
 }
-.auth-back:hover { color: rgba(255,255,255,0.75); }
+.auth-back:hover { color: var(--text); }
 
 /* ══════════════════════════════════════════════
    LOKAL-VISARE (rums-kort)
@@ -602,24 +629,24 @@ h2 {
 }
 
 .room-card:hover {
-  border-color: var(--blue);
+  border-color: var(--primary);
 }
 
 .room-card:focus-visible {
-  outline: 2px solid var(--blue);
+  outline: 2px solid var(--primary);
   outline-offset: 2px;
 }
 
 .room-card.is-selected {
-  border-color: var(--blue);
-  background: rgba(47, 111, 158, 0.05);
-  box-shadow: 0 0 0 2px var(--blue), var(--shadow);
+  border-color: var(--primary);
+  background: var(--primary-soft);
+  box-shadow: 0 0 0 2px var(--primary), var(--shadow);
 }
 
 .room-card .room-meta {
   font-size: 12.5px;
   font-weight: 700;
-  color: var(--blue);
+  color: var(--primary);
   margin: -4px 0 10px;
 }
 
@@ -669,7 +696,7 @@ h2 {
   font-family: inherit;
   font-size: 16px;
 }
-.fh-cal-nav-btn:hover { background: #ececea; }
+.fh-cal-nav-btn:hover { background: #ececee; }
 
 .fh-cal-range {
   font-weight: 800;
@@ -685,7 +712,7 @@ h2 {
   border-radius: 999px;
   border: 1px solid var(--line);
   background: #fff;
-  color: var(--blue);
+  color: var(--primary);
   cursor: pointer;
   transition: background 0.2s;
   font-family: inherit;
@@ -698,7 +725,7 @@ h2 {
   margin-bottom: 10px;
   min-height: 18px;
 }
-.fh-cal-status.is-error { color: #b3413f; }
+.fh-cal-status.is-error { color: #a83e4a; }
 
 .fh-cal-scroll {
   overflow-x: auto;
@@ -717,7 +744,7 @@ h2 {
   text-align: center;
   border-bottom: 2px solid var(--line);
 }
-.fh-cal-day-head.is-today { color: var(--blue); }
+.fh-cal-day-head.is-today { color: var(--primary); }
 
 .fh-cal-day-name {
   display: block;
@@ -727,7 +754,7 @@ h2 {
   letter-spacing: 0.06em;
   color: var(--muted-2);
 }
-.fh-cal-day-head.is-today .fh-cal-day-name { color: var(--blue); }
+.fh-cal-day-head.is-today .fh-cal-day-name { color: var(--primary); }
 
 .fh-cal-day-num {
   display: block;
@@ -761,20 +788,20 @@ h2 {
   cursor: pointer;
   transition: background 0.15s;
 }
-.fh-cal-hour-cell:hover { background: rgba(47, 111, 158, 0.07); }
+.fh-cal-hour-cell:hover { background: var(--primary-soft); }
 
 .fh-cal-event {
   position: absolute;
   left: 3px;
   right: 3px;
   border-radius: 8px;
-  background: linear-gradient(135deg, var(--blue-light), var(--blue));
+  background: linear-gradient(135deg, var(--primary-light), var(--primary));
   color: #fff;
   padding: 4px 6px;
   font-size: 11px;
   line-height: 1.25;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(47, 111, 158, 0.25);
+  box-shadow: 0 2px 8px rgba(15, 118, 136, 0.25);
   display: flex;
   flex-direction: column;
   gap: 1px;
@@ -783,11 +810,11 @@ h2 {
 
 .fh-cal-event--allday {
   background: linear-gradient(135deg, var(--amber-light), var(--amber));
-  color: #241505;
+  color: #2b1804;
 }
 
 .fh-cal-event--unsure {
-  background: linear-gradient(135deg, #8a8a86, #6b6b67);
+  background: linear-gradient(135deg, #9a9a96, #7b7b77);
   outline: 1px dashed rgba(255, 255, 255, 0.6);
   outline-offset: -3px;
 }
@@ -812,9 +839,9 @@ h2 {
   margin-top: 14px;
   font-size: 13px;
   font-weight: 700;
-  color: var(--blue);
-  background: rgba(47, 111, 158, 0.08);
-  border: 1px solid rgba(47, 111, 158, 0.18);
+  color: var(--primary);
+  background: var(--primary-soft);
+  border: 1px solid rgba(15, 118, 136, 0.18);
   padding: 10px 14px;
   border-radius: 12px;
 }
@@ -830,7 +857,7 @@ h2 {
   .fh-cal { padding: 16px; }
 }
 
-/* Light form variant (booking page on white background) */
+/* Formulärkort */
 .form-card {
   background: #fff;
   border: 1px solid var(--line);
@@ -855,7 +882,7 @@ h2 {
 .form-card .field input:focus,
 .form-card .field select:focus,
 .form-card .field textarea:focus {
-  border-color: var(--blue);
+  border-color: var(--primary);
   background: #fff;
 }
 
@@ -876,9 +903,9 @@ h2 {
 
 .form-success {
   display: none;
-  background: rgba(47, 111, 158, 0.10);
-  border: 1px solid rgba(47, 111, 158, 0.25);
-  color: var(--blue);
+  background: var(--primary-soft);
+  border: 1px solid rgba(15, 118, 136, 0.25);
+  color: var(--primary);
   font-weight: 700;
   font-size: 14px;
   padding: 14px 18px;
@@ -911,8 +938,8 @@ h2 {
   width: 32px;
   height: 32px;
   border-radius: 10px;
-  background: rgba(47, 111, 158, 0.10);
-  color: var(--blue);
+  background: var(--primary-soft);
+  color: var(--primary);
   font-weight: 800;
   font-size: 13px;
   display: flex;
@@ -948,13 +975,14 @@ h2 {
 }
 
 /* ══════════════════════════════════════════════
-   FOOTER
+   FOOTER — ljus, avgränsad med en linje
 ══════════════════════════════════════════════ */
 
 .site-footer {
-  background: linear-gradient(160deg, var(--dark) 0%, var(--dark-2) 60%, #050c15 100%);
-  color: #fff;
+  background: var(--bg-soft);
+  color: var(--text);
   padding: 56px 0 28px;
+  border-top: 1px solid var(--line);
 }
 
 .footer-top {
@@ -963,7 +991,7 @@ h2 {
   justify-content: space-between;
   gap: 30px;
   padding-bottom: 34px;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid var(--line);
 }
 
 .footer-brand {
@@ -976,19 +1004,19 @@ h2 {
 }
 
 .footer-brand .brand-logo-plate {
-  padding: 4px 10px;
+  padding: 0;
   box-shadow: none;
 }
 
 .footer-brand .brand-logo {
-  height: 28px;
+  height: 34px;
 }
 
 .footer-brand small {
   display: block;
   font-size: 12px;
   font-weight: 500;
-  color: rgba(255,255,255,0.42);
+  color: var(--muted-2);
   margin-top: 2px;
 }
 
@@ -1000,10 +1028,10 @@ h2 {
 
 .footer-nav a {
   font-size: 14px;
-  color: rgba(255,255,255,0.58);
+  color: var(--muted);
   transition: color 0.2s;
 }
-.footer-nav a:hover { color: #fff; }
+.footer-nav a:hover { color: var(--primary); }
 
 .footer-bottom {
   padding-top: 22px;
@@ -1016,18 +1044,18 @@ h2 {
 
 .footer-copyright {
   font-size: 12.5px;
-  color: rgba(255,255,255,0.32);
+  color: var(--muted-2);
   margin: 0;
 }
 
 .footer-sub {
   font-size: 12.5px;
-  color: rgba(255,255,255,0.32);
+  color: var(--muted-2);
   margin: 0;
 }
 
-.footer-sub a { color: rgba(255,255,255,0.5); }
-.footer-sub a:hover { color: #fff; }
+.footer-sub a { color: var(--muted); }
+.footer-sub a:hover { color: var(--primary); }
 
 /* ══════════════════════════════════════════════
    RESPONSIVE
@@ -1039,7 +1067,7 @@ h2 {
 }
 
 @media (max-width: 640px) {
-  .hero-section { padding: 64px 0 56px; }
+  .hero-section { padding: 56px 0 48px; }
   .section { padding: 56px 0; }
   .card-grid { grid-template-columns: 1fr; }
   .feature-tile { padding: 32px 26px; }
