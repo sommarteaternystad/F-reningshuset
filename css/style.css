@@ -89,8 +89,8 @@ img { display: block; max-width: 100%; }
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  min-height: 76px;
-  padding: 10px 0;
+  min-height: 128px;
+  padding: 14px 0;
 }
 
 .nav-brand {
@@ -118,7 +118,7 @@ img { display: block; max-width: 100%; }
 
 .brand-logo {
   display: block;
-  height: 52px;
+  height: 112px;
   width: auto;
 }
 
@@ -197,7 +197,7 @@ img { display: block; max-width: 100%; }
   .site-nav-inner { flex-wrap: wrap; min-height: unset; padding: 14px 0; gap: 12px; }
   .nav-pills-row { width: 100%; justify-content: flex-start; }
   .nav-pill { min-height: 36px; padding: 0 14px; font-size: 12.5px; }
-  .brand-logo { height: 40px; }
+  .brand-logo { height: 76px; }
 }
 
 /* ══════════════════════════════════════════════
@@ -491,7 +491,7 @@ h2 {
 ══════════════════════════════════════════════ */
 
 .auth-wrap {
-  min-height: calc(100vh - 76px);
+  min-height: calc(100vh - 128px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -996,11 +996,13 @@ h2 {
 
 .footer-brand {
   display: flex;
-  align-items: center;
-  gap: 12px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
   font-size: 17px;
   font-weight: 800;
   letter-spacing: -0.02em;
+  max-width: 320px;
 }
 
 .footer-brand .brand-logo-plate {
@@ -1009,7 +1011,7 @@ h2 {
 }
 
 .footer-brand .brand-logo {
-  height: 34px;
+  height: 68px;
 }
 
 .footer-brand small {
@@ -1019,6 +1021,43 @@ h2 {
   color: var(--muted-2);
   margin-top: 2px;
 }
+
+.footer-address {
+  font-style: normal;
+  margin: 0;
+}
+
+.footer-address-item {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.footer-address-item svg {
+  flex-shrink: 0;
+  margin-top: 3px;
+  color: var(--primary);
+}
+
+.footer-contact-info {
+  margin: 0;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--muted);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.footer-contact-info a {
+  color: var(--muted);
+  transition: color 0.2s;
+}
+.footer-contact-info a:hover { color: var(--primary); }
 
 .footer-nav {
   display: flex;
