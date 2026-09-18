@@ -1161,6 +1161,7 @@ h2 {
 .safety-extra {
   border-top: 1px solid var(--line);
   padding-top: 24px;
+  margin-bottom: 28px;
 }
 
 .safety-extra h3 {
@@ -1182,6 +1183,37 @@ h2 {
   line-height: 1.6;
   color: var(--muted);
 }
+
+/* Fälls in/ut — bara titel + ingress syns tills man öppnar */
+.safety-details { margin-top: 4px; }
+
+.safety-summary {
+  list-style: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+  font-size: 14px;
+  color: #c0392b;
+  padding: 12px 20px;
+  background: rgba(192, 57, 43, 0.08);
+  border: 1px solid rgba(192, 57, 43, 0.20);
+  border-radius: 999px;
+  transition: background 0.2s;
+}
+.safety-summary:hover { background: rgba(192, 57, 43, 0.14); }
+.safety-summary::-webkit-details-marker { display: none; }
+.safety-summary::marker { content: ''; }
+
+.safety-summary .show-when-open { display: none; }
+details[open] .safety-summary .show-when-open { display: inline; }
+details[open] .safety-summary .show-when-closed { display: none; }
+
+.safety-summary-chevron { transition: transform 0.2s; flex-shrink: 0; }
+details[open] .safety-summary-chevron { transform: rotate(180deg); }
+
+.safety-details-content { padding-top: 28px; }
 
 @media (max-width: 640px) {
   .safety-box { padding: 22px; }
