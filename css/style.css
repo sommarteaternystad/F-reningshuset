@@ -89,8 +89,8 @@ img { display: block; max-width: 100%; }
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  min-height: 128px;
-  padding: 14px 0;
+  min-height: 76px;
+  padding: 10px 0;
 }
 
 .nav-brand {
@@ -118,7 +118,7 @@ img { display: block; max-width: 100%; }
 
 .brand-logo {
   display: block;
-  height: 112px;
+  height: 48px;
   width: auto;
 }
 
@@ -197,7 +197,7 @@ img { display: block; max-width: 100%; }
   .site-nav-inner { flex-wrap: wrap; min-height: unset; padding: 14px 0; gap: 12px; }
   .nav-pills-row { width: 100%; justify-content: flex-start; }
   .nav-pill { min-height: 36px; padding: 0 14px; font-size: 12.5px; }
-  .brand-logo { height: 76px; }
+  .brand-logo { height: 38px; }
 }
 
 /* ══════════════════════════════════════════════
@@ -237,7 +237,7 @@ img { display: block; max-width: 100%; }
 }
 
 .hero-logo-img {
-  height: clamp(76px, 12vw, 128px);
+  height: clamp(140px, 24vw, 300px);
   width: auto;
 }
 
@@ -491,7 +491,7 @@ h2 {
 ══════════════════════════════════════════════ */
 
 .auth-wrap {
-  min-height: calc(100vh - 128px);
+  min-height: calc(100vh - 76px);
   display: flex;
   align-items: center;
   justify-content: center;
