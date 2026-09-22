@@ -23,7 +23,6 @@
         <a href="/" class="nav-pill nav-pill--ghost">Hem</a>
         <a href="intranat.html" class="nav-pill is-active">Intranät</a>
         <a href="boka-lokal.html" class="nav-pill nav-pill--cta">Boka lokal</a>
-        <a href="mina-sidor.html" class="nav-pill nav-pill--ghost">Mina sidor</a>
         <a href="#" class="nav-pill nav-pill--ghost" onclick="fhLogout(); return false;">Logga ut</a>
       </nav>
     </div>
@@ -33,16 +32,82 @@
   <section class="hero-section" style="padding: 64px 0 52px;">
     <div class="container hero-content">
       <span class="hero-kicker">För oss i huset</span>
-      <h1 class="hero-title" style="font-size: clamp(30px, 4.6vw, 46px);">Välkommen in</h1>
-      <p class="hero-lede">Här samlar vi det som gäller för oss som verkar i huset — rutiner, regler och bokning av lokal.</p>
-      <div class="hero-actions">
-        <a href="boka-lokal.html" class="btn btn-amber">Boka lokal →</a>
+      <h1 class="hero-title" style="font-size: clamp(30px, 4.6vw, 46px);">Välkommen in, <span data-fh-tenant-name>…</span></h1>
+      <p class="hero-lede">Här samlar vi det som gäller för oss som verkar i huset — era uppdrag, brandrutiner, regler och bokning av lokal.</p>
+    </div>
+  </section>
+
+  <div class="container" style="max-width: 720px;">
+    <div class="fh-cal-status" id="fhDashboardStatus" style="margin-bottom: 12px;"></div>
+  </div>
+
+  <!-- ═══ NYCKLAR ═══ -->
+  <section class="section" style="padding-top: 8px; padding-bottom: 8px;">
+    <div class="container" style="max-width: 720px;">
+      <div class="keycount-card">
+        <div>
+          <div class="keycount-number"><span id="fhKeyCount">–</span></div>
+        </div>
+        <div class="keycount-label">Nycklar ni ansvarar för<br>Behöver ni fler? Hör av er till verksamhetsansvarig.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ UPPDRAG ═══ -->
+  <section class="section on-soft" style="padding-top: 12px;">
+    <div class="container" style="max-width: 720px;">
+      <header class="section-head">
+        <p class="section-kicker">Det här ska göras</p>
+        <h2>Uppdrag för i år</h2>
+        <p class="section-lede">Klicka på ett uppdrag för att bocka av det som klart. Nya uppdrag läggs till löpande.</p>
+      </header>
+
+      <div class="task-list" id="fhTaskList">
+        <p class="task-meta">Hämtar uppdrag …</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SKICKA IN TEXT/LOGGA ═══ -->
+  <section class="section">
+    <div class="container" style="max-width: 720px;">
+      <header class="section-head">
+        <p class="section-kicker">Synas på hemsidan</p>
+        <h2>Skicka in text eller logga</h2>
+        <p class="section-lede">Skickas för granskning — vi lägger in det på verksamheter-sidan när vi godkänt det.</p>
+      </header>
+
+      <div class="form-card">
+        <div class="submit-status" id="fhSubmitStatus"></div>
+
+        <form id="fhSubmitForm" autocomplete="off">
+          <div class="field">
+            <label for="fhSubmitType">Typ</label>
+            <select id="fhSubmitType" name="fhSubmitType" required>
+              <option value="Text">Text om verksamheten</option>
+              <option value="Logga">Logga</option>
+              <option value="Text och logga">Både text och logga</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="fhSubmitText">Text (valfritt om ni bara skickar en logga)</label>
+            <textarea id="fhSubmitText" name="fhSubmitText" placeholder="Kort beskrivning av er verksamhet att visa på verksamheter-sidan…"></textarea>
+          </div>
+
+          <div class="field">
+            <label for="fhSubmitImage">Logga (valfritt om ni bara skickar text)</label>
+            <input type="file" id="fhSubmitImage" name="fhSubmitImage" accept="image/*">
+          </div>
+
+          <button type="submit" class="btn btn-amber btn-block">Skicka in →</button>
+        </form>
       </div>
     </div>
   </section>
 
   <!-- ═══ BOKA LOKAL — STOR CTA ═══ -->
-  <section class="section" style="padding-bottom: 24px;">
+  <section class="section on-soft" style="padding-bottom: 24px;">
     <div class="container">
       <article class="feature-tile">
         <span class="feature-tile-tag">Det vi använder mest just nu</span>
@@ -56,7 +121,7 @@
   </section>
 
   <!-- ═══ RUTINER — BRAND ═══ -->
-  <section class="section on-soft" id="rutiner">
+  <section class="section" id="rutiner">
     <div class="container">
       <div class="safety-box">
         <div class="safety-box-header">
@@ -177,7 +242,7 @@
   </section>
 
   <!-- ═══ REGLER ═══ -->
-  <section class="section" id="regler">
+  <section class="section on-soft" id="regler">
     <div class="container">
       <header class="section-head">
         <p class="section-kicker">Regler</p>
@@ -217,7 +282,6 @@
           <a href="intranat.html#rutiner">Rutiner</a>
           <a href="intranat.html#regler">Regler</a>
           <a href="boka-lokal.html">Boka lokal</a>
-          <a href="mina-sidor.html">Mina sidor</a>
           <a href="#" onclick="fhLogout(); return false;">Logga ut</a>
         </nav>
       </div>
@@ -230,5 +294,8 @@
 
   <script src="js/auth.js"></script>
   <script>fhGuardPage();</script>
+  <script src="js/tenant-api.js"></script>
+  <script src="js/tenant-dashboard.js"></script>
+  <script>fhInitDashboard(); fhInitSubmitForm();</script>
 </body>
 </html>
