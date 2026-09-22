@@ -1044,6 +1044,25 @@ h2 {
 
 .form-card .field select option { background: #fff; color: var(--text); }
 
+/* Formulärkort som lyfts fram som en direkt del av ett uppdrag */
+.form-card--task {
+  background: rgba(237, 162, 63, 0.07);
+  border: 1.5px solid rgba(237, 162, 63, 0.4);
+  box-shadow: var(--shadow-dark);
+}
+
+/* Panel som bara syns när motsvarande uppdrag klickas i uppdragslistan */
+.task-submit-panel {
+  display: none;
+  animation: fhTaskPanelIn 0.35s ease;
+}
+.task-submit-panel.is-visible { display: block; }
+
+@keyframes fhTaskPanelIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1391,9 +1410,14 @@ details[open] .safety-summary-chevron { transform: rotate(180deg); }
   border-radius: var(--radius-sm);
   padding: 16px 18px;
   cursor: pointer;
-  transition: border-color 0.2s, background 0.2s;
+  box-shadow: var(--shadow);
+  transition: border-color 0.2s, background 0.2s, transform 0.2s, box-shadow 0.2s;
 }
-.task-item:hover { border-color: var(--primary); }
+.task-item:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-dark);
+}
 
 .task-item.is-done {
   background: var(--primary-soft);

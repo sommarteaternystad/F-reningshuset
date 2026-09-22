@@ -11,6 +11,19 @@ function fhReadFileAsDataUrl(file) {
   });
 }
 
+function fhIsSubmitTask(taskName) {
+  var t = (taskName || '').toLowerCase();
+  return t.indexOf('skicka in') !== -1 && (t.indexOf('text') !== -1 || t.indexOf('logga') !== -1 || t.indexOf('bild') !== -1);
+}
+
+function fhToggleSubmitPanel() {
+  var panel = document.getElementById('fhSubmitPanel');
+  if (!panel) return;
+  var willShow = !panel.classList.contains('is-visible');
+  panel.classList.toggle('is-visible', willShow);
+  if (willShow) panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
 function fhRenderTasks(tasks, token) {
   var list = document.getElementById('fhTaskList');
   if (!list) return;
@@ -73,9 +86,15 @@ function fhRenderTasks(tasks, token) {
       }
     }
 
-    item.addEventListener('click', toggle);
+    var isSubmitTask = fhIsSubmitTask(task.uppdrag);
+    function handleActivate() {
+      toggle();
+      if (isSubmitTask) fhToggleSubmitPanel();
+    }
+
+    item.addEventListener('click', handleActivate);
     item.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleActivate(); }
     });
 
     list.appendChild(item);

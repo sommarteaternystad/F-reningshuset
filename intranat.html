@@ -59,7 +59,7 @@
       <header class="section-head">
         <p class="section-kicker">Det här ska göras</p>
         <h2>Uppdrag för i år</h2>
-        <p class="section-lede">Klicka på ett uppdrag för att bocka av det som klart. Nya uppdrag läggs till löpande.</p>
+        <p class="section-lede">Klicka på ett uppdrag för att bocka av det som klart. Uppdraget "Skicka in text/logga" öppnar formuläret nedan. Nya uppdrag läggs till löpande.</p>
       </header>
 
       <div class="task-list" id="fhTaskList">
@@ -68,8 +68,8 @@
     </div>
   </section>
 
-  <!-- ═══ SKICKA IN TEXT/LOGGA ═══ -->
-  <section class="section">
+  <!-- ═══ SKICKA IN TEXT/LOGGA (döljs tills uppdraget klickas i listan ovan) ═══ -->
+  <section class="section task-submit-panel" id="fhSubmitPanel">
     <div class="container" style="max-width: 720px;">
       <header class="section-head">
         <p class="section-kicker">Synas på hemsidan</p>
@@ -77,7 +77,7 @@
         <p class="section-lede">Skickas för granskning — vi lägger in det på verksamheter-sidan när vi godkänt det.</p>
       </header>
 
-      <div class="form-card">
+      <div class="form-card form-card--task">
         <div class="submit-status" id="fhSubmitStatus"></div>
 
         <form id="fhSubmitForm" autocomplete="off">
