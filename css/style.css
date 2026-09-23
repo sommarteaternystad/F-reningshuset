@@ -1036,22 +1036,8 @@ h2 {
   line-height: 1.65;
 }
 
-/* Praktiskt — nycklar-stat + knappar */
-.practical-stat {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 12px;
-}
-.practical-stat-label { font-weight: 700; font-size: 14.5px; color: var(--text); }
-.practical-stat-value { font-size: 30px; font-weight: 900; color: var(--primary); letter-spacing: -0.02em; }
-.practical-stat-note { font-size: 13px; color: var(--muted-2); margin: 4px 0 24px; }
-
+/* Praktiskt — Boka lokal & Felanmälan som långa knappar, var sin rad */
 .practical-buttons { display: flex; flex-direction: column; gap: 10px; }
-@media (min-width: 480px) {
-  .practical-buttons { flex-direction: row; }
-  .practical-buttons .btn { flex: 1; }
-}
 
 /* Felanmälan — popup */
 .fh-modal-overlay {
