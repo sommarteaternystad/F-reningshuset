@@ -1013,6 +1013,94 @@ h2 {
   .fh-cal-today-btn { padding: 6px 12px; font-size: 11.5px; }
 }
 
+/* Panel-kort — samma yta som används av Uppdrag, Praktiskt, Rutiner och Regler
+   så att de sektionerna ser enhetliga och lugna ut. */
+.panel-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 30px;
+  box-shadow: var(--shadow);
+}
+.panel-card > h3 {
+  margin: 0 0 10px;
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+.panel-card > p {
+  margin: 0 0 20px;
+  font-size: 14.5px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+/* Praktiskt — nycklar-stat + knappar */
+.practical-stat {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+.practical-stat-label { font-weight: 700; font-size: 14.5px; color: var(--text); }
+.practical-stat-value { font-size: 30px; font-weight: 900; color: var(--primary); letter-spacing: -0.02em; }
+.practical-stat-note { font-size: 13px; color: var(--muted-2); margin: 4px 0 24px; }
+
+.practical-buttons { display: flex; flex-direction: column; gap: 10px; }
+@media (min-width: 480px) {
+  .practical-buttons { flex-direction: row; }
+  .practical-buttons .btn { flex: 1; }
+}
+
+/* Felanmälan — popup */
+.fh-modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 22, 25, 0.55);
+  z-index: 300;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40px 20px;
+  overflow-y: auto;
+}
+.fh-modal-overlay.is-open { display: flex; }
+
+.fh-modal {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  padding: 36px;
+  max-width: 560px;
+  width: 100%;
+  position: relative;
+  box-shadow: var(--shadow-dark);
+}
+
+.fh-modal-title { margin: 0 0 6px; font-size: 26px; }
+
+.fh-modal-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted-2);
+  transition: background 0.15s, color 0.15s;
+}
+.fh-modal-close:hover { background: var(--bg-soft); color: var(--text); }
+
+@media (max-width: 480px) {
+  .fh-modal { padding: 26px; }
+}
+
 /* Formulärkort */
 .form-card {
   background: #fff;
@@ -1043,13 +1131,6 @@ h2 {
 }
 
 .form-card .field select option { background: #fff; color: var(--text); }
-
-/* Formulärkort som lyfts fram som en direkt del av ett uppdrag */
-.form-card--task {
-  background: rgba(237, 162, 63, 0.07);
-  border: 1.5px solid rgba(237, 162, 63, 0.4);
-  box-shadow: var(--shadow-dark);
-}
 
 /* Panel som bara syns när motsvarande uppdrag klickas i uppdragslistan */
 .task-submit-panel {
@@ -1094,62 +1175,6 @@ h2 {
    (röd/orange) så säkerhetsinfo aldrig kan förväxlas
    med vanligt varumärkesinnehåll.
 ══════════════════════════════════════════════ */
-
-.safety-box {
-  background: #fff;
-  border: 2px solid rgba(192, 57, 43, 0.25);
-  border-radius: var(--radius-lg);
-  padding: 36px;
-  box-shadow: 0 18px 50px rgba(192, 57, 43, 0.08);
-}
-
-.safety-box-header {
-  display: flex;
-  align-items: flex-start;
-  gap: 18px;
-  margin-bottom: 18px;
-}
-
-.safety-icon {
-  flex-shrink: 0;
-  width: 52px;
-  height: 52px;
-  border-radius: 14px;
-  background: linear-gradient(135deg, #e0684f 0%, #c0392b 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 10px 26px rgba(192, 57, 43, 0.35);
-}
-
-.safety-kicker {
-  margin: 0 0 4px;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  font-size: 12px;
-  font-weight: 800;
-  color: #c0392b;
-}
-
-.safety-box-header h3 {
-  margin: 0;
-  font-size: clamp(22px, 3vw, 30px);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  font-weight: 800;
-  color: var(--text);
-}
-
-.safety-lead {
-  font-size: 16px;
-  line-height: 1.7;
-  color: var(--text);
-  background: rgba(192, 57, 43, 0.06);
-  border-left: 3px solid #c0392b;
-  padding: 14px 18px;
-  border-radius: 0 12px 12px 0;
-  margin: 0 0 24px;
-}
 
 .safety-callouts {
   display: grid;

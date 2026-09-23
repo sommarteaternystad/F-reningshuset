@@ -249,6 +249,31 @@ function fhRenderNews(news) {
   });
 }
 
+function fhInitFaultModal() {
+  var openBtn = document.getElementById('fhOpenFaultBtn');
+  var overlay = document.getElementById('fhFaultModalOverlay');
+  var closeBtn = document.getElementById('fhFaultModalClose');
+  if (!openBtn || !overlay) return;
+
+  function openModal() {
+    overlay.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    overlay.classList.remove('is-open');
+    document.body.style.overflow = '';
+  }
+
+  openBtn.addEventListener('click', openModal);
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', function (e) {
+    if (e.target === overlay) closeModal();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && overlay.classList.contains('is-open')) closeModal();
+  });
+}
+
 function fhInitFaultForm() {
   var form = document.getElementById('fhFaultForm');
   var status = document.getElementById('fhFaultStatus');
