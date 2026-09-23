@@ -1036,6 +1036,13 @@ h2 {
   line-height: 1.65;
 }
 
+/* Rutiner — flera panel-kort under varandra (Brand, WiFi, fler tillkommer) */
+.rutiner-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 /* Praktiskt — Boka lokal & Felanmälan som långa knappar, var sin rad */
 .practical-buttons { display: flex; flex-direction: column; gap: 10px; }
 
