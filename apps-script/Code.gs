@@ -46,6 +46,14 @@
       Datum | Rubrik | Text
       (fyller DU i manuellt — en rad per nyhet. Nyaste rad visas
       överst. Syns för alla inloggade föreningar under Nyheter.)
+
+   7. "Avvikelser"
+      Datum | Förening | Beskrivning | Bildlänk | Status
+      (fylls i AUTOMATISKT när en förening skickar in en avvikelse
+      eller visselblåsning — säkerhet, incidenter, trakasserier eller
+      liknande. Status börjar som "Ny" — skriv "PÅGÅENDE" eller "LÖST"
+      i Status-kolumnen. Ligger under Regler på hemsidan, skilt från
+      Felanmälningar som är för praktiska/tekniska fel.)
    ───────────────────────────────────────────────────────────── */
 
 var NOTIFY_EMAIL = 'info@sommarteaternystad.com'; // hit skickas ett mejl vid nya förslag
@@ -66,6 +74,7 @@ function doPost(e) {
   if (action === 'toggleTask') return toggleTask_(body.token, body.task);
   if (action === 'submitContent') return submitContent_(body.token, body.type, body.text, body.imageBase64, body.imageName);
   if (action === 'reportFault') return reportFault_(body.token, body.text, body.imageBase64, body.imageName);
+  if (action === 'reportDeviation') return reportDeviation_(body.token, body.text, body.imageBase64, body.imageName);
 
   return jsonOut_({ ok: false, error: 'Okänd åtgärd' });
 }
@@ -169,7 +178,25 @@ function getDashboard_(token) {
     // Fliken "Nyheter" finns inte ännu — visa bara en tom lista tills den skapas.
   }
 
-  return jsonOut_({ ok: true, name: name, nycklar: nycklar, tasks: tasks, faults: faults, news: news });
+  var deviations = [];
+  try {
+    var deviationRows = getSheet_('Avvikelser').getDataRange().getValues();
+    for (var d = 1; d < deviationRows.length; d++) {
+      if (String(deviationRows[d][1] || '').trim() !== name) continue;
+      if (!String(deviationRows[d][2] || '').trim()) continue;
+      deviations.push({
+        datum: deviationRows[d][0],
+        beskrivning: deviationRows[d][2],
+        bildlank: deviationRows[d][3] || '',
+        status: String(deviationRows[d][4] || 'Ny').trim()
+      });
+    }
+    deviations.reverse(); // senaste överst
+  } catch (err) {
+    // Fliken "Avvikelser" finns inte ännu — visa bara en tom lista tills den skapas.
+  }
+
+  return jsonOut_({ ok: true, name: name, nycklar: nycklar, tasks: tasks, faults: faults, news: news, deviations: deviations });
 }
 
 /* ── Bocka av / ångra ett uppdrag ─────────────────────────────── */
@@ -258,6 +285,43 @@ function reportFault_(token, text, imageBase64, imageName) {
       body: 'Förening: ' + name + '\n\nFel:\n' + String(text).trim() +
         (link ? '\n\nBild: ' + link : '') +
         '\n\nUppdatera status i fliken "Felanmälningar" i kalkylarket (t.ex. PÅGÅENDE eller LÖST).'
+    });
+  } catch (err) {
+    // Mejlet är trevligt att ha men får inte stoppa inskicket.
+  }
+
+  return jsonOut_({ ok: true });
+}
+
+/* ── Avvikelse / visselblåsning ───────────────────────────────── */
+
+function reportDeviation_(token, text, imageBase64, imageName) {
+  var name = nameFromToken_(token);
+  if (!name) return jsonOut_({ ok: false, error: 'Sessionen har gått ut — logga in igen.' });
+  if (!text || !String(text).trim()) return jsonOut_({ ok: false, error: 'Beskriv vad som hänt.' });
+
+  var link = '';
+  if (imageBase64) {
+    try {
+      var folder = getOrCreateFolder_(DRIVE_FOLDER_NAME);
+      var bytes = Utilities.base64Decode(imageBase64.split(',').pop());
+      var blob = Utilities.newBlob(bytes, MimeType.PNG, (imageName || 'avvikelse') + '-' + Date.now() + '.png');
+      var file = folder.createFile(blob);
+      link = file.getUrl();
+    } catch (err) {
+      return jsonOut_({ ok: false, error: 'Kunde inte spara bilden: ' + err.message });
+    }
+  }
+
+  getSheet_('Avvikelser').appendRow([new Date(), name, String(text).trim(), link, 'Ny']);
+
+  try {
+    MailApp.sendEmail({
+      to: NOTIFY_EMAIL,
+      subject: 'Ny avvikelse/visselblåsning från ' + name + ' — Föreningshuset',
+      body: 'Förening: ' + name + '\n\nBeskrivning:\n' + String(text).trim() +
+        (link ? '\n\nBild: ' + link : '') +
+        '\n\nUppdatera status i fliken "Avvikelser" i kalkylarket (t.ex. PÅGÅENDE eller LÖST).'
     });
   } catch (err) {
     // Mejlet är trevligt att ha men får inte stoppa inskicket.

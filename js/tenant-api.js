@@ -46,3 +46,13 @@ function fhApiReportFault(token, text, imageBase64, imageName) {
     imageName: imageName || null
   });
 }
+
+function fhApiReportDeviation(token, text, imageBase64, imageName) {
+  return fhApiCall({
+    action: 'reportDeviation',
+    token: token,
+    text: text,
+    imageBase64: imageBase64 || null,
+    imageName: imageName || null
+  });
+}

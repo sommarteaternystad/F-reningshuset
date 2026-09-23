@@ -1036,8 +1036,8 @@ h2 {
   line-height: 1.65;
 }
 
-/* Rutiner — flera panel-kort under varandra (Brand, WiFi, fler tillkommer) */
-.rutiner-list {
+/* Flera panel-kort under varandra i en sektion (Rutiner, Regler, fler tillkommer) */
+.card-stack {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -1085,6 +1085,7 @@ h2 {
 }
 .action-btn-icon--amber { background: rgba(237, 162, 63, 0.16); color: #b6791f; }
 .action-btn-icon--coral { background: rgba(217, 99, 111, 0.14); color: var(--coral); }
+.action-btn-icon--danger { background: rgba(192, 57, 43, 0.12); color: #c0392b; }
 
 .action-btn-label { flex: 1; }
 .action-btn-arrow { flex-shrink: 0; color: var(--muted-2); font-weight: 800; }

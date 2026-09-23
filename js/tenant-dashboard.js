@@ -155,22 +155,22 @@ function fhBuildFaultItem(f, statusKey) {
   return item;
 }
 
-function fhRenderFaults(faults) {
-  var list = document.getElementById('fhFaultList');
+function fhRenderStatusList(items, listId, emptyText) {
+  var list = document.getElementById(listId);
   if (!list) return;
   list.innerHTML = '';
 
-  if (!faults.length) {
+  if (!items.length) {
     var empty = document.createElement('p');
     empty.className = 'task-meta';
-    empty.textContent = 'Inga felanmälningar inskickade ännu.';
+    empty.textContent = emptyText;
     list.appendChild(empty);
     return;
   }
 
   var groups = { ny: [], pagaende: [], lost: [] };
-  faults.forEach(function (f) {
-    groups[fhNormalizeFaultStatus(f.status)].push(f);
+  items.forEach(function (item) {
+    groups[fhNormalizeFaultStatus(item.status)].push(item);
   });
 
   var order = [
@@ -180,21 +180,29 @@ function fhRenderFaults(faults) {
   ];
 
   order.forEach(function (group) {
-    var items = groups[group.key];
-    if (!items.length) return;
+    var groupItems = groups[group.key];
+    if (!groupItems.length) return;
 
     var heading = document.createElement('p');
     heading.className = 'fault-group-heading';
-    heading.textContent = group.label + ' (' + items.length + ')';
+    heading.textContent = group.label + ' (' + groupItems.length + ')';
     list.appendChild(heading);
 
     var groupList = document.createElement('div');
     groupList.className = 'fault-group-list';
-    items.forEach(function (f) {
-      groupList.appendChild(fhBuildFaultItem(f, group.key));
+    groupItems.forEach(function (item) {
+      groupList.appendChild(fhBuildFaultItem(item, group.key));
     });
     list.appendChild(groupList);
   });
+}
+
+function fhRenderFaults(faults) {
+  fhRenderStatusList(faults, 'fhFaultList', 'Inga felanmälningar inskickade ännu.');
+}
+
+function fhRenderDeviations(deviations) {
+  fhRenderStatusList(deviations, 'fhDeviationList', 'Inga avvikelser inskickade ännu.');
 }
 
 function fhRenderNews(news) {
@@ -249,10 +257,10 @@ function fhRenderNews(news) {
   });
 }
 
-function fhInitFaultModal() {
-  var openBtn = document.getElementById('fhOpenFaultBtn');
-  var overlay = document.getElementById('fhFaultModalOverlay');
-  var closeBtn = document.getElementById('fhFaultModalClose');
+function fhInitModal(openBtnId, overlayId, closeBtnId) {
+  var openBtn = document.getElementById(openBtnId);
+  var overlay = document.getElementById(overlayId);
+  var closeBtn = document.getElementById(closeBtnId);
   if (!openBtn || !overlay) return;
 
   function openModal() {
@@ -274,16 +282,16 @@ function fhInitFaultModal() {
   });
 }
 
-function fhInitFaultForm() {
-  var form = document.getElementById('fhFaultForm');
-  var status = document.getElementById('fhFaultStatus');
+function fhInitReportForm(opts) {
+  var form = document.getElementById(opts.formId);
+  var status = document.getElementById(opts.statusId);
   if (!form) return;
 
   form.addEventListener('submit', async function (e) {
     e.preventDefault();
     var token = fhGetToken();
-    var text = form.fhFaultText.value.trim();
-    var fileInput = form.fhFaultImage;
+    var text = form[opts.textField].value.trim();
+    var fileInput = form[opts.imageField];
     var submitBtn = form.querySelector('button[type="submit"]');
 
     if (!text) return;
@@ -299,9 +307,9 @@ function fhInitFaultForm() {
     if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Skickar …'; }
 
     try {
-      var res = await fhApiReportFault(token, text, imageBase64, imageName);
+      var res = await opts.apiCall(token, text, imageBase64, imageName);
       if (res.ok) {
-        status.textContent = 'Tack! Felanmälan är inskickad.';
+        status.textContent = opts.successMessage;
         status.classList.add('show');
         form.reset();
         fhInitDashboard();
@@ -313,8 +321,32 @@ function fhInitFaultForm() {
       status.textContent = 'Kunde inte skicka in — kontrollera internetanslutningen och försök igen.';
       status.classList.add('show');
     } finally {
-      if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Skicka felanmälan →'; }
+      if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = opts.submitLabel; }
     }
+  });
+}
+
+function fhInitFaultForm() {
+  fhInitReportForm({
+    formId: 'fhFaultForm',
+    statusId: 'fhFaultStatus',
+    textField: 'fhFaultText',
+    imageField: 'fhFaultImage',
+    apiCall: fhApiReportFault,
+    successMessage: 'Tack! Felanmälan är inskickad.',
+    submitLabel: 'Skicka felanmälan →'
+  });
+}
+
+function fhInitDeviationForm() {
+  fhInitReportForm({
+    formId: 'fhDeviationForm',
+    statusId: 'fhDeviationStatus',
+    textField: 'fhDeviationText',
+    imageField: 'fhDeviationImage',
+    apiCall: fhApiReportDeviation,
+    successMessage: 'Tack! Avvikelsen är inskickad till verksamhetsansvarig.',
+    submitLabel: 'Skicka avvikelse →'
   });
 }
 
@@ -343,6 +375,7 @@ async function fhInitDashboard() {
     fhRenderTasks(data.tasks || [], token);
     fhRenderFaults(data.faults || []);
     fhRenderNews(data.news || []);
+    fhRenderDeviations(data.deviations || []);
   } catch (err) {
     if (statusEl) {
       statusEl.textContent = 'Kunde inte nå servern just nu. Kontrollera internetanslutningen och ladda om sidan.';
