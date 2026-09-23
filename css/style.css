@@ -1462,6 +1462,27 @@ details[open] .safety-summary-chevron { transform: rotate(180deg); }
 }
 
 /* Felanmälan */
+.fault-list-heading {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--text);
+  margin: 4px 0 14px;
+}
+
+.fault-group-heading {
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--muted-2);
+}
+
+.fault-group-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .fault-item {
   display: flex;
   flex-direction: column;

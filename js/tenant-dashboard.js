@@ -114,6 +114,47 @@ function fhFaultStatusLabel(key) {
   return 'Ny';
 }
 
+function fhBuildFaultItem(f, statusKey) {
+  var item = document.createElement('div');
+  item.className = 'fault-item';
+
+  var top = document.createElement('div');
+  top.className = 'fault-item-top';
+
+  var text = document.createElement('div');
+  text.className = 'fault-text';
+  text.textContent = f.beskrivning;
+
+  var badge = document.createElement('span');
+  badge.className = 'fault-status fault-status--' + statusKey;
+  badge.textContent = fhFaultStatusLabel(statusKey);
+
+  top.appendChild(text);
+  top.appendChild(badge);
+
+  var meta = document.createElement('div');
+  meta.className = 'fault-date';
+  var dateText = '';
+  if (f.datum) {
+    var d = new Date(f.datum);
+    if (!isNaN(d.getTime())) dateText = d.toLocaleDateString('sv-SE');
+  }
+  meta.textContent = dateText;
+
+  if (f.bildlank) {
+    var link = document.createElement('a');
+    link.href = f.bildlank;
+    link.target = '_blank';
+    link.rel = 'noopener';
+    link.textContent = (dateText ? ' · ' : '') + 'Bild bifogad';
+    meta.appendChild(link);
+  }
+
+  item.appendChild(top);
+  item.appendChild(meta);
+  return item;
+}
+
 function fhRenderFaults(faults) {
   var list = document.getElementById('fhFaultList');
   if (!list) return;
@@ -127,47 +168,32 @@ function fhRenderFaults(faults) {
     return;
   }
 
+  var groups = { ny: [], pagaende: [], lost: [] };
   faults.forEach(function (f) {
-    var statusKey = fhNormalizeFaultStatus(f.status);
+    groups[fhNormalizeFaultStatus(f.status)].push(f);
+  });
 
-    var item = document.createElement('div');
-    item.className = 'fault-item';
+  var order = [
+    { key: 'ny', label: 'Nya' },
+    { key: 'pagaende', label: 'Pågående' },
+    { key: 'lost', label: 'Lösta' }
+  ];
 
-    var top = document.createElement('div');
-    top.className = 'fault-item-top';
+  order.forEach(function (group) {
+    var items = groups[group.key];
+    if (!items.length) return;
 
-    var text = document.createElement('div');
-    text.className = 'fault-text';
-    text.textContent = f.beskrivning;
+    var heading = document.createElement('p');
+    heading.className = 'fault-group-heading';
+    heading.textContent = group.label + ' (' + items.length + ')';
+    list.appendChild(heading);
 
-    var badge = document.createElement('span');
-    badge.className = 'fault-status fault-status--' + statusKey;
-    badge.textContent = fhFaultStatusLabel(statusKey);
-
-    top.appendChild(text);
-    top.appendChild(badge);
-
-    var meta = document.createElement('div');
-    meta.className = 'fault-date';
-    var dateText = '';
-    if (f.datum) {
-      var d = new Date(f.datum);
-      if (!isNaN(d.getTime())) dateText = d.toLocaleDateString('sv-SE');
-    }
-    meta.textContent = dateText;
-
-    if (f.bildlank) {
-      var link = document.createElement('a');
-      link.href = f.bildlank;
-      link.target = '_blank';
-      link.rel = 'noopener';
-      link.textContent = (dateText ? ' · ' : '') + 'Bild bifogad';
-      meta.appendChild(link);
-    }
-
-    item.appendChild(top);
-    item.appendChild(meta);
-    list.appendChild(item);
+    var groupList = document.createElement('div');
+    groupList.className = 'fault-group-list';
+    items.forEach(function (f) {
+      groupList.appendChild(fhBuildFaultItem(f, group.key));
+    });
+    list.appendChild(groupList);
   });
 }
 
