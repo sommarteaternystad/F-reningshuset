@@ -101,6 +101,120 @@ function fhRenderTasks(tasks, token) {
   });
 }
 
+function fhNormalizeFaultStatus(raw) {
+  var s = (raw || '').toString().trim().toUpperCase();
+  if (s.indexOf('LÖST') !== -1 || s.indexOf('LOST') !== -1 || s === 'KLAR') return 'lost';
+  if (s.indexOf('PÅG') !== -1 || s.indexOf('PAG') !== -1) return 'pagaende';
+  return 'ny';
+}
+
+function fhFaultStatusLabel(key) {
+  if (key === 'lost') return 'Löst';
+  if (key === 'pagaende') return 'Pågående';
+  return 'Ny';
+}
+
+function fhRenderFaults(faults) {
+  var list = document.getElementById('fhFaultList');
+  if (!list) return;
+  list.innerHTML = '';
+
+  if (!faults.length) {
+    var empty = document.createElement('p');
+    empty.className = 'task-meta';
+    empty.textContent = 'Inga felanmälningar inskickade ännu.';
+    list.appendChild(empty);
+    return;
+  }
+
+  faults.forEach(function (f) {
+    var statusKey = fhNormalizeFaultStatus(f.status);
+
+    var item = document.createElement('div');
+    item.className = 'fault-item';
+
+    var top = document.createElement('div');
+    top.className = 'fault-item-top';
+
+    var text = document.createElement('div');
+    text.className = 'fault-text';
+    text.textContent = f.beskrivning;
+
+    var badge = document.createElement('span');
+    badge.className = 'fault-status fault-status--' + statusKey;
+    badge.textContent = fhFaultStatusLabel(statusKey);
+
+    top.appendChild(text);
+    top.appendChild(badge);
+
+    var meta = document.createElement('div');
+    meta.className = 'fault-date';
+    var dateText = '';
+    if (f.datum) {
+      var d = new Date(f.datum);
+      if (!isNaN(d.getTime())) dateText = d.toLocaleDateString('sv-SE');
+    }
+    meta.textContent = dateText;
+
+    if (f.bildlank) {
+      var link = document.createElement('a');
+      link.href = f.bildlank;
+      link.target = '_blank';
+      link.rel = 'noopener';
+      link.textContent = (dateText ? ' · ' : '') + 'Bild bifogad';
+      meta.appendChild(link);
+    }
+
+    item.appendChild(top);
+    item.appendChild(meta);
+    list.appendChild(item);
+  });
+}
+
+function fhInitFaultForm() {
+  var form = document.getElementById('fhFaultForm');
+  var status = document.getElementById('fhFaultStatus');
+  if (!form) return;
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    var token = fhGetToken();
+    var text = form.fhFaultText.value.trim();
+    var fileInput = form.fhFaultImage;
+    var submitBtn = form.querySelector('button[type="submit"]');
+
+    if (!text) return;
+
+    var imageBase64 = null;
+    var imageName = null;
+    if (fileInput.files && fileInput.files[0]) {
+      var file = fileInput.files[0];
+      imageName = file.name;
+      imageBase64 = await fhReadFileAsDataUrl(file);
+    }
+
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Skickar …'; }
+
+    try {
+      var res = await fhApiReportFault(token, text, imageBase64, imageName);
+      if (res.ok) {
+        status.textContent = 'Tack! Felanmälan är inskickad.';
+        status.classList.add('show');
+        form.reset();
+        fhInitDashboard();
+      } else {
+        status.textContent = res.error || 'Något gick fel — försök igen.';
+        status.classList.add('show');
+      }
+    } catch (err) {
+      status.textContent = 'Kunde inte skicka in — kontrollera internetanslutningen och försök igen.';
+      status.classList.add('show');
+    } finally {
+      if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Skicka felanmälan →'; }
+    }
+  });
+}
+
 async function fhInitDashboard() {
   var token = fhGetToken();
   var statusEl = document.getElementById('fhDashboardStatus');
@@ -124,6 +238,7 @@ async function fhInitDashboard() {
     if (keyNumberEl) keyNumberEl.textContent = data.nycklar;
     document.querySelectorAll('[data-fh-tenant-name]').forEach(function (el) { el.textContent = data.name; });
     fhRenderTasks(data.tasks || [], token);
+    fhRenderFaults(data.faults || []);
   } catch (err) {
     if (statusEl) {
       statusEl.textContent = 'Kunde inte nå servern just nu. Kontrollera internetanslutningen och ladda om sidan.';

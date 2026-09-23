@@ -34,6 +34,13 @@
       en logga för granskning. Status börjar som "Väntar" — ändra
       till "Godkänd" eller "Avvisad" när du hanterat det. Publicera
       sedan manuellt på hemsidan, precis som idag.)
+
+   5. "Felanmälningar"
+      Datum | Förening | Beskrivning | Bildlänk | Status
+      (fylls i AUTOMATISKT när en förening skickar in en felanmälan.
+      Status börjar som "Ny" — skriv "PÅGÅENDE" eller "LÖST" i
+      Status-kolumnen så syns det direkt på förenings egen sida.
+      Raden ligger alltid kvar i deras lista, bara statusen ändras.)
    ───────────────────────────────────────────────────────────── */
 
 var NOTIFY_EMAIL = 'info@sommarteaternystad.com'; // hit skickas ett mejl vid nya förslag
@@ -53,6 +60,7 @@ function doPost(e) {
   if (action === 'getDashboard') return getDashboard_(body.token);
   if (action === 'toggleTask') return toggleTask_(body.token, body.task);
   if (action === 'submitContent') return submitContent_(body.token, body.type, body.text, body.imageBase64, body.imageName);
+  if (action === 'reportFault') return reportFault_(body.token, body.text, body.imageBase64, body.imageName);
 
   return jsonOut_({ ok: false, error: 'Okänd åtgärd' });
 }
@@ -125,7 +133,25 @@ function getDashboard_(token) {
     });
   }
 
-  return jsonOut_({ ok: true, name: name, nycklar: nycklar, tasks: tasks });
+  var faults = [];
+  try {
+    var faultRows = getSheet_('Felanmälningar').getDataRange().getValues();
+    for (var f = 1; f < faultRows.length; f++) {
+      if (String(faultRows[f][1] || '').trim() !== name) continue;
+      if (!String(faultRows[f][2] || '').trim()) continue;
+      faults.push({
+        datum: faultRows[f][0],
+        beskrivning: faultRows[f][2],
+        bildlank: faultRows[f][3] || '',
+        status: String(faultRows[f][4] || 'Ny').trim()
+      });
+    }
+    faults.reverse(); // senaste överst
+  } catch (err) {
+    // Fliken "Felanmälningar" finns inte ännu — visa bara en tom lista tills den skapas.
+  }
+
+  return jsonOut_({ ok: true, name: name, nycklar: nycklar, tasks: tasks, faults: faults });
 }
 
 /* ── Bocka av / ångra ett uppdrag ─────────────────────────────── */
@@ -177,6 +203,43 @@ function submitContent_(token, type, text, imageBase64, imageName) {
       body: 'Förening: ' + name + '\nTyp: ' + (type || '') + '\n\nText:\n' + (text || '(ingen text)') +
         (link ? '\n\nBild: ' + link : '') +
         '\n\nGranska och uppdatera status i fliken "Förslag" i kalkylarket.'
+    });
+  } catch (err) {
+    // Mejlet är trevligt att ha men får inte stoppa inskicket.
+  }
+
+  return jsonOut_({ ok: true });
+}
+
+/* ── Felanmälan ───────────────────────────────────────────────── */
+
+function reportFault_(token, text, imageBase64, imageName) {
+  var name = nameFromToken_(token);
+  if (!name) return jsonOut_({ ok: false, error: 'Sessionen har gått ut — logga in igen.' });
+  if (!text || !String(text).trim()) return jsonOut_({ ok: false, error: 'Skriv en beskrivning av felet.' });
+
+  var link = '';
+  if (imageBase64) {
+    try {
+      var folder = getOrCreateFolder_(DRIVE_FOLDER_NAME);
+      var bytes = Utilities.base64Decode(imageBase64.split(',').pop());
+      var blob = Utilities.newBlob(bytes, MimeType.PNG, (imageName || 'felanmalan') + '-' + Date.now() + '.png');
+      var file = folder.createFile(blob);
+      link = file.getUrl();
+    } catch (err) {
+      return jsonOut_({ ok: false, error: 'Kunde inte spara bilden: ' + err.message });
+    }
+  }
+
+  getSheet_('Felanmälningar').appendRow([new Date(), name, String(text).trim(), link, 'Ny']);
+
+  try {
+    MailApp.sendEmail({
+      to: NOTIFY_EMAIL,
+      subject: 'Ny felanmälan från ' + name + ' — Föreningshuset',
+      body: 'Förening: ' + name + '\n\nFel:\n' + String(text).trim() +
+        (link ? '\n\nBild: ' + link : '') +
+        '\n\nUppdatera status i fliken "Felanmälningar" i kalkylarket (t.ex. PÅGÅENDE eller LÖST).'
     });
   } catch (err) {
     // Mejlet är trevligt att ha men får inte stoppa inskicket.

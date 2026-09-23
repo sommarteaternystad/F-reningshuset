@@ -120,6 +120,39 @@
     </div>
   </section>
 
+  <!-- ═══ FELANMÄLAN ═══ -->
+  <section class="section">
+    <div class="container" style="max-width: 720px;">
+      <header class="section-head">
+        <p class="section-kicker">Något trasigt eller fel?</p>
+        <h2>Felanmälan</h2>
+        <p class="section-lede">Anmäl fel i huset så tar vi tag i det. Status uppdateras här nedan när vi börjat åtgärda eller löst felet.</p>
+      </header>
+
+      <div class="form-card form-card--task" style="margin-bottom: 28px;">
+        <div class="submit-status" id="fhFaultStatus"></div>
+
+        <form id="fhFaultForm" autocomplete="off">
+          <div class="field">
+            <label for="fhFaultText">Vad är felet?</label>
+            <textarea id="fhFaultText" name="fhFaultText" placeholder="Beskriv felet så tydligt du kan — vad, var och sedan när…" required></textarea>
+          </div>
+
+          <div class="field">
+            <label for="fhFaultImage">Bild (valfritt)</label>
+            <input type="file" id="fhFaultImage" name="fhFaultImage" accept="image/*">
+          </div>
+
+          <button type="submit" class="btn btn-amber btn-block">Skicka felanmälan →</button>
+        </form>
+      </div>
+
+      <div class="task-list" id="fhFaultList">
+        <p class="task-meta">Hämtar felanmälningar …</p>
+      </div>
+    </div>
+  </section>
+
   <!-- ═══ RUTINER — BRAND ═══ -->
   <section class="section" id="rutiner">
     <div class="container">
@@ -296,6 +329,6 @@
   <script>fhGuardPage();</script>
   <script src="js/tenant-api.js"></script>
   <script src="js/tenant-dashboard.js"></script>
-  <script>fhInitDashboard(); fhInitSubmitForm();</script>
+  <script>fhInitDashboard(); fhInitSubmitForm(); fhInitFaultForm();</script>
 </body>
 </html>
