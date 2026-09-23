@@ -1043,8 +1043,52 @@ h2 {
   gap: 20px;
 }
 
-/* Praktiskt — Boka lokal & Felanmälan som långa knappar, var sin rad */
+/* Praktiskt — genvägar som långa rader med egen symbol, alltid var sin rad
+   (fler genvägar läggs till på samma sätt framöver). */
 .practical-buttons { display: flex; flex-direction: column; gap: 10px; }
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  background: #fff;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+.action-btn:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-dark);
+}
+
+.action-btn-icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary-soft);
+  color: var(--primary);
+}
+.action-btn-icon--amber { background: rgba(237, 162, 63, 0.16); color: #b6791f; }
+.action-btn-icon--coral { background: rgba(217, 99, 111, 0.14); color: var(--coral); }
+
+.action-btn-label { flex: 1; }
+.action-btn-arrow { flex-shrink: 0; color: var(--muted-2); font-weight: 800; }
+.action-btn:hover .action-btn-arrow { color: var(--primary); }
 
 /* Felanmälan — popup */
 .fh-modal-overlay {
