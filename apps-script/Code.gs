@@ -41,6 +41,11 @@
       Status börjar som "Ny" — skriv "PÅGÅENDE" eller "LÖST" i
       Status-kolumnen så syns det direkt på förenings egen sida.
       Raden ligger alltid kvar i deras lista, bara statusen ändras.)
+
+   6. "Nyheter"
+      Datum | Rubrik | Text
+      (fyller DU i manuellt — en rad per nyhet. Nyaste rad visas
+      överst. Syns för alla inloggade föreningar under Nyheter.)
    ───────────────────────────────────────────────────────────── */
 
 var NOTIFY_EMAIL = 'info@sommarteaternystad.com'; // hit skickas ett mejl vid nya förslag
@@ -151,7 +156,20 @@ function getDashboard_(token) {
     // Fliken "Felanmälningar" finns inte ännu — visa bara en tom lista tills den skapas.
   }
 
-  return jsonOut_({ ok: true, name: name, nycklar: nycklar, tasks: tasks, faults: faults });
+  var news = [];
+  try {
+    var newsRows = getSheet_('Nyheter').getDataRange().getValues();
+    for (var n = 1; n < newsRows.length; n++) {
+      var rubrik = String(newsRows[n][1] || '').trim();
+      if (!rubrik) continue;
+      news.push({ datum: newsRows[n][0], rubrik: rubrik, text: String(newsRows[n][2] || '').trim() });
+    }
+    news.sort(function (a, b) { return new Date(b.datum) - new Date(a.datum); });
+  } catch (err) {
+    // Fliken "Nyheter" finns inte ännu — visa bara en tom lista tills den skapas.
+  }
+
+  return jsonOut_({ ok: true, name: name, nycklar: nycklar, tasks: tasks, faults: faults, news: news });
 }
 
 /* ── Bocka av / ångra ett uppdrag ─────────────────────────────── */

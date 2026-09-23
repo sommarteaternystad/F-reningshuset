@@ -197,6 +197,58 @@ function fhRenderFaults(faults) {
   });
 }
 
+function fhRenderNews(news) {
+  var list = document.getElementById('fhNewsList');
+  if (!list) return;
+  list.innerHTML = '';
+
+  if (!news.length) {
+    var empty = document.createElement('p');
+    empty.className = 'task-meta';
+    empty.textContent = 'Inga nyheter just nu.';
+    list.appendChild(empty);
+    return;
+  }
+
+  news.forEach(function (n) {
+    var item = document.createElement('details');
+    item.className = 'news-item';
+
+    var summary = document.createElement('summary');
+    summary.className = 'news-item-summary';
+
+    var titleWrap = document.createElement('div');
+    var title = document.createElement('div');
+    title.className = 'news-item-title';
+    title.textContent = n.rubrik;
+    var date = document.createElement('div');
+    date.className = 'news-item-date';
+    var dateText = '';
+    if (n.datum) {
+      var d = new Date(n.datum);
+      if (!isNaN(d.getTime())) dateText = d.toLocaleDateString('sv-SE');
+    }
+    date.textContent = dateText;
+    titleWrap.appendChild(title);
+    titleWrap.appendChild(date);
+
+    var chevron = document.createElement('span');
+    chevron.className = 'news-item-chevron';
+    chevron.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
+
+    summary.appendChild(titleWrap);
+    summary.appendChild(chevron);
+
+    var body = document.createElement('div');
+    body.className = 'news-item-body';
+    body.textContent = n.text;
+
+    item.appendChild(summary);
+    item.appendChild(body);
+    list.appendChild(item);
+  });
+}
+
 function fhInitFaultForm() {
   var form = document.getElementById('fhFaultForm');
   var status = document.getElementById('fhFaultStatus');
@@ -265,6 +317,7 @@ async function fhInitDashboard() {
     document.querySelectorAll('[data-fh-tenant-name]').forEach(function (el) { el.textContent = data.name; });
     fhRenderTasks(data.tasks || [], token);
     fhRenderFaults(data.faults || []);
+    fhRenderNews(data.news || []);
   } catch (err) {
     if (statusEl) {
       statusEl.textContent = 'Kunde inte nå servern just nu. Kontrollera internetanslutningen och ladda om sidan.';
