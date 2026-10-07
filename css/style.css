@@ -457,6 +457,17 @@ h2 {
   gap: 18px;
 }
 
+.card-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+.card-grid > .card,
+.card-grid-2 > .card { min-width: 0; }
+@media (max-width: 640px) {
+  .card-grid-2 { grid-template-columns: 1fr; }
+}
+
 .card {
   background: #fff;
   border: 1px solid var(--line);
@@ -502,6 +513,7 @@ h2 {
   color: var(--muted);
   line-height: 1.65;
 }
+.card p a { color: var(--primary); font-weight: 700; text-decoration: underline; text-underline-offset: 2px; overflow-wrap: break-word; }
 
 /* Färgstark feature-platta (för oss i huset / boka lokal) */
 .feature-tile {
