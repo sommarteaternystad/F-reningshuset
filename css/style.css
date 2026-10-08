@@ -1857,6 +1857,148 @@ details[open] .safety-summary-chevron { transform: rotate(180deg); }
 .footer-sub a:hover { color: var(--primary); }
 
 /* ══════════════════════════════════════════════
+   BAKGRUND-SIDAN — om förvaltningsövergången
+══════════════════════════════════════════════ */
+
+/* Teaser-banner på startsidan som länkar till bakgrund.html */
+.announcement-banner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--primary-soft);
+  border: 1.5px solid rgba(15, 118, 136, 0.22);
+  border-radius: var(--radius-lg);
+  padding: 20px 26px;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.announcement-banner:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+
+.announcement-banner-icon {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: #fff;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.announcement-banner-text { flex: 1; font-size: 14.5px; color: var(--text); line-height: 1.5; }
+.announcement-banner-text strong { color: var(--primary); }
+
+.announcement-banner-arrow { flex-shrink: 0; font-weight: 800; color: var(--primary); white-space: nowrap; }
+
+/* Tidslinje ("Vägen hit") */
+.timeline {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  position: relative;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 24px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--line);
+}
+.timeline-step { position: relative; }
+.timeline-dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  font-weight: 900;
+  font-size: 12px;
+  color: #fff;
+  margin-bottom: 14px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+.timeline-dot--amber { background: var(--amber); color: #2b1804; }
+.timeline-dot--coral { background: var(--coral); }
+.timeline-dot--primary { background: var(--primary); }
+.timeline-step h4 { margin: 0 0 6px; font-size: 15.5px; font-weight: 800; }
+.timeline-step p { margin: 0; font-size: 13.5px; color: var(--muted); line-height: 1.6; }
+
+/* Stora cirkelstatistik */
+.stat-circles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+}
+.stat-circle {
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  color: #fff;
+}
+.stat-circle--primary { background: linear-gradient(135deg, var(--primary-light), var(--primary)); }
+.stat-circle--amber { background: linear-gradient(135deg, var(--amber-light), var(--amber)); color: #2b1804; }
+.stat-circle--sky { background: linear-gradient(135deg, #7fb4d6, var(--sky)); }
+.stat-circle-number { font-size: 34px; font-weight: 900; letter-spacing: -0.02em; }
+.stat-circle-label { font-size: 12.5px; font-weight: 700; margin-top: 6px; line-height: 1.4; }
+
+/* Taggar ("Huset ska präglas av") */
+.tag-pills { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0 16px; }
+.tag-pill {
+  display: inline-flex;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--text);
+}
+
+/* Ansvarsområden-grid */
+.responsibility-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px 24px;
+}
+.responsibility-item { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 14.5px; }
+.responsibility-icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--bg-soft);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Framhävd ruta (gradient, vit text) */
+.emphasis-box {
+  background: linear-gradient(135deg, var(--primary-light), var(--primary));
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  color: #fff;
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+}
+.emphasis-box .card-icon { background: rgba(255, 255, 255, 0.2); color: #fff; margin-bottom: 0; flex-shrink: 0; }
+.emphasis-box h3 { margin: 0 0 8px; font-size: 19px; font-weight: 800; color: #fff; }
+.emphasis-box p { margin: 0; font-size: 14.5px; line-height: 1.65; color: rgba(255, 255, 255, 0.9); }
+
+/* ══════════════════════════════════════════════
    RESPONSIVE
 ══════════════════════════════════════════════ */
 
@@ -1873,4 +2015,17 @@ details[open] .safety-summary-chevron { transform: rotate(180deg); }
   .auth-card { padding: 34px 26px; }
   .form-card { padding: 26px; }
   .footer-top { flex-direction: column; }
+
+  .announcement-banner { flex-direction: column; align-items: flex-start; }
+  .announcement-banner-arrow { align-self: flex-end; }
+
+  .timeline { grid-template-columns: 1fr; gap: 28px; }
+  .timeline::before { display: none; }
+
+  .stat-circle { width: 150px; height: 150px; }
+  .stat-circle-number { font-size: 26px; }
+
+  .responsibility-grid { grid-template-columns: 1fr 1fr; }
+
+  .emphasis-box { flex-direction: column; }
 }
