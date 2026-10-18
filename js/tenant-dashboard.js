@@ -197,10 +197,6 @@ function fhRenderStatusList(items, listId, emptyText) {
   });
 }
 
-function fhRenderFaults(faults) {
-  fhRenderStatusList(faults, 'fhFaultList', 'Inga felanmälningar inskickade ännu.');
-}
-
 function fhRenderDeviations(deviations) {
   fhRenderStatusList(deviations, 'fhDeviationList', 'Inga avvikelser inskickade ännu.');
 }
@@ -326,18 +322,6 @@ function fhInitReportForm(opts) {
   });
 }
 
-function fhInitFaultForm() {
-  fhInitReportForm({
-    formId: 'fhFaultForm',
-    statusId: 'fhFaultStatus',
-    textField: 'fhFaultText',
-    imageField: 'fhFaultImage',
-    apiCall: fhApiReportFault,
-    successMessage: 'Tack! Felanmälan är inskickad.',
-    submitLabel: 'Skicka felanmälan →'
-  });
-}
-
 function fhInitDeviationForm() {
   fhInitReportForm({
     formId: 'fhDeviationForm',
@@ -373,7 +357,6 @@ async function fhInitDashboard() {
     if (keyNumberEl) keyNumberEl.textContent = data.nycklar;
     document.querySelectorAll('[data-fh-tenant-name]').forEach(function (el) { el.textContent = data.name; });
     fhRenderTasks(data.tasks || [], token);
-    fhRenderFaults(data.faults || []);
     fhRenderNews(data.news || []);
     fhRenderDeviations(data.deviations || []);
   } catch (err) {

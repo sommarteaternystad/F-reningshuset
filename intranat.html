@@ -136,13 +136,13 @@
             <span class="action-btn-label">Boka lokal</span>
             <span class="action-btn-arrow">→</span>
           </a>
-          <button type="button" class="action-btn" id="fhOpenFaultBtn">
+          <a href="https://online.reduca.se/#!/arende/4QVHM6FF" target="_blank" rel="noopener" class="action-btn">
             <span class="action-btn-icon action-btn-icon--coral">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94Z"/></svg>
             </span>
             <span class="action-btn-label">Felanmälan</span>
             <span class="action-btn-arrow">→</span>
-          </button>
+          </a>
         </div>
       </article>
     </div>
@@ -427,41 +427,6 @@
     </div>
   </footer>
 
-  <!-- ═══ FELANMÄLAN — POPUP ═══ -->
-  <div class="fh-modal-overlay" id="fhFaultModalOverlay">
-    <div class="fh-modal" role="dialog" aria-modal="true" aria-labelledby="fhFaultModalTitle">
-      <button type="button" class="fh-modal-close" id="fhFaultModalClose" aria-label="Stäng">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
-      </button>
-
-      <p class="section-kicker">Något trasigt eller fel?</p>
-      <h2 id="fhFaultModalTitle" class="fh-modal-title">Felanmälan</h2>
-      <p class="section-lede" style="margin-bottom: 24px;">Anmäl fel i huset så tar vi tag i det. Status uppdateras här nedan när vi börjat åtgärda eller löst felet.</p>
-
-      <div class="submit-status" id="fhFaultStatus"></div>
-
-      <form id="fhFaultForm" autocomplete="off">
-        <div class="field">
-          <label for="fhFaultText">Vad är felet?</label>
-          <textarea id="fhFaultText" name="fhFaultText" placeholder="Beskriv felet så tydligt du kan — vad, var och sedan när…" required></textarea>
-        </div>
-
-        <div class="field">
-          <label for="fhFaultImage">Bild (valfritt)</label>
-          <input type="file" id="fhFaultImage" name="fhFaultImage" accept="image/*">
-        </div>
-
-        <button type="submit" class="btn btn-amber btn-block">Skicka felanmälan →</button>
-      </form>
-
-      <h3 class="fault-list-heading">Inskickade felanmälningar</h3>
-
-      <div class="task-list" id="fhFaultList">
-        <p class="task-meta">Hämtar felanmälningar …</p>
-      </div>
-    </div>
-  </div>
-
   <!-- ═══ AVVIKELSE & VISSELBLÅSNING — POPUP ═══ -->
   <div class="fh-modal-overlay" id="fhDeviationModalOverlay">
     <div class="fh-modal" role="dialog" aria-modal="true" aria-labelledby="fhDeviationModalTitle">
@@ -504,9 +469,7 @@
   <script>
     fhInitDashboard();
     fhInitSubmitForm();
-    fhInitFaultForm();
     fhInitDeviationForm();
-    fhInitModal('fhOpenFaultBtn', 'fhFaultModalOverlay', 'fhFaultModalClose');
     fhInitModal('fhOpenDeviationBtn', 'fhDeviationModalOverlay', 'fhDeviationModalClose');
   </script>
 </body>

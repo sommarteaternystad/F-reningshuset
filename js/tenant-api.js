@@ -37,16 +37,6 @@ function fhApiSubmitContent(token, type, text, imageBase64, imageName) {
   });
 }
 
-function fhApiReportFault(token, text, imageBase64, imageName) {
-  return fhApiCall({
-    action: 'reportFault',
-    token: token,
-    text: text,
-    imageBase64: imageBase64 || null,
-    imageName: imageName || null
-  });
-}
-
 function fhApiReportDeviation(token, text, imageBase64, imageName) {
   return fhApiCall({
     action: 'reportDeviation',
