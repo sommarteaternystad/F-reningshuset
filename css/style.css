@@ -460,10 +460,38 @@ h2 {
 .card-grid-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  align-items: start;
   gap: 18px;
 }
 .card-grid > .card,
 .card-grid-2 > .card { min-width: 0; }
+
+.card-room-list {
+  list-style: none;
+  margin: 0 0 16px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.card-room-list li {
+  font-size: 13.5px;
+  color: var(--muted);
+  line-height: 1.5;
+  padding-left: 15px;
+  position: relative;
+}
+.card-room-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--primary);
+}
+.card-room-list strong { color: var(--text); font-weight: 700; }
 @media (max-width: 640px) {
   .card-grid-2 { grid-template-columns: 1fr; }
 }
