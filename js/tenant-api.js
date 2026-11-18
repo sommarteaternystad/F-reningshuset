@@ -37,6 +37,10 @@ function fhApiSubmitContent(token, type, text, imageBase64, imageName) {
   });
 }
 
+function fhApiGetNews() {
+  return fhApiCall({ action: 'getNews' });
+}
+
 function fhApiReportDeviation(token, text, imageBase64, imageName) {
   return fhApiCall({
     action: 'reportDeviation',

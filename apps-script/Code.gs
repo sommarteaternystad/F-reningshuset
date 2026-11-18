@@ -43,7 +43,9 @@
    6. "Nyheter"
       Datum | Rubrik | Text
       (fyller DU i manuellt — en rad per nyhet. Nyaste rad visas
-      överst. Syns för alla inloggade föreningar under Nyheter.)
+      överst. Syns dels för alla inloggade föreningar under Nyheter
+      på intranat.html, dels publikt och utan inloggning på
+      nyheter.html — samma lista på båda ställena.)
 
    7. "Avvikelser"
       Datum | Förening | Beskrivning | Bildlänk | Status
@@ -72,6 +74,7 @@ function doPost(e) {
   if (action === 'toggleTask') return toggleTask_(body.token, body.task);
   if (action === 'submitContent') return submitContent_(body.token, body.type, body.text, body.imageBase64, body.imageName);
   if (action === 'reportDeviation') return reportDeviation_(body.token, body.text, body.imageBase64, body.imageName);
+  if (action === 'getNews') return jsonOut_({ ok: true, news: readNews_() });
 
   return jsonOut_({ ok: false, error: 'Okänd åtgärd' });
 }
@@ -144,18 +147,7 @@ function getDashboard_(token) {
     });
   }
 
-  var news = [];
-  try {
-    var newsRows = getSheet_('Nyheter').getDataRange().getValues();
-    for (var n = 1; n < newsRows.length; n++) {
-      var rubrik = String(newsRows[n][1] || '').trim();
-      if (!rubrik) continue;
-      news.push({ datum: newsRows[n][0], rubrik: rubrik, text: String(newsRows[n][2] || '').trim() });
-    }
-    news.sort(function (a, b) { return new Date(b.datum) - new Date(a.datum); });
-  } catch (err) {
-    // Fliken "Nyheter" finns inte ännu — visa bara en tom lista tills den skapas.
-  }
+  var news = readNews_();
 
   var deviations = [];
   try {
@@ -270,6 +262,24 @@ function reportDeviation_(token, text, imageBase64, imageName) {
   }
 
   return jsonOut_({ ok: true });
+}
+
+/* ── Nyheter (publikt, ingen inloggning krävs) ────────────────── */
+
+function readNews_() {
+  var news = [];
+  try {
+    var newsRows = getSheet_('Nyheter').getDataRange().getValues();
+    for (var n = 1; n < newsRows.length; n++) {
+      var rubrik = String(newsRows[n][1] || '').trim();
+      if (!rubrik) continue;
+      news.push({ datum: newsRows[n][0], rubrik: rubrik, text: String(newsRows[n][2] || '').trim() });
+    }
+    news.sort(function (a, b) { return new Date(b.datum) - new Date(a.datum); });
+  } catch (err) {
+    // Fliken "Nyheter" finns inte ännu — visa bara en tom lista tills den skapas.
+  }
+  return news;
 }
 
 /* ── Hjälpfunktioner ──────────────────────────────────────────── */

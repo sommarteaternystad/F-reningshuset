@@ -1083,6 +1083,30 @@ h2 {
   gap: 20px;
 }
 
+/* Publik nyhetsblogg (nyheter.html) */
+.blog-post-date {
+  margin: 0 0 8px;
+  font-size: 12.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted-2);
+}
+.blog-post-title {
+  margin: 0 0 14px;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+.blog-post-text {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--muted);
+  white-space: pre-line;
+}
+
 /* Praktiskt — genvägar som långa rader med egen symbol, alltid var sin rad
    (fler genvägar läggs till på samma sätt framöver). */
 .practical-buttons { display: flex; flex-direction: column; gap: 10px; }

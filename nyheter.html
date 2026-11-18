@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nyheter — Föreningshuset</title>
+  <meta name="description" content="Nyheter från Föreningshuset i Ystad — vad som händer i huset och bland föreningarna.">
+  <link rel="canonical" href="https://föreningshusetystad.se/nyheter.html">
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#0f7688">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Föreningshuset Ystad">
+  <meta property="og:locale" content="sv_SE">
+  <meta property="og:title" content="Nyheter — Föreningshuset">
+  <meta property="og:description" content="Nyheter från Föreningshuset i Ystad — vad som händer i huset och bland föreningarna.">
+  <meta property="og:url" content="https://föreningshusetystad.se/nyheter.html">
+  <meta property="og:image" content="https://föreningshusetystad.se/images/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Nyheter — Föreningshuset">
+  <meta name="twitter:description" content="Nyheter från Föreningshuset i Ystad — vad som händer i huset och bland föreningarna.">
+  <meta name="twitter:image" content="https://föreningshusetystad.se/images/og-image.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..900;1,14..32,300..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=7">
+</head>
+<body>
+
+  <!-- ═══ NAV ═══ -->
+  <header class="site-nav">
+    <div class="container site-nav-inner">
+      <a href="/" class="nav-brand">
+        <span class="brand-logo-plate"><img src="images/logo.png" alt="Föreningshuset Ystad" class="brand-logo"></span>
+      </a>
+      <nav class="nav-pills-row" aria-label="Huvudnavigation">
+        <a href="/" class="nav-pill">Hem</a>
+        <a href="om-oss.html" class="nav-pill">Om oss</a>
+        <a href="verksamheter.html" class="nav-pill">Verksamheter</a>
+        <a href="nyheter.html" class="nav-pill is-active">Nyheter</a>
+        <a href="for-oss-i-huset.html" class="nav-pill nav-pill--cta">För oss i huset</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ═══ HEADER ═══ -->
+  <section class="hero-section" style="padding: 72px 0 56px;">
+    <div class="container hero-content">
+      <span class="hero-kicker">Vad händer i huset</span>
+      <h1 class="hero-title" style="font-size: clamp(32px, 5vw, 52px);">Nyheter</h1>
+      <p class="hero-lede">Här samlar vi nyheter från Föreningshuset — vad som händer i huset och bland föreningarna som verkar här.</p>
+    </div>
+  </section>
+
+  <!-- ═══ NYHETSLISTA ═══ -->
+  <section class="section" style="padding-top: 16px;">
+    <div class="container" style="max-width: 720px;">
+      <div class="card-stack" id="fhNewsList">
+        <p class="task-meta">Hämtar nyheter …</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <span class="brand-logo-plate"><img src="images/logo.png" alt="Föreningshuset Ystad" class="brand-logo"></span>
+          <address class="footer-address">
+            <div class="footer-address-item">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <div>Björnstjernegatan 18<br>271 39 Ystad</div>
+            </div>
+          </address>
+          <div class="footer-contact-info">
+            <a href="mailto:info@sommarteaternystad.com">info@sommarteaternystad.com</a>
+            <a href="tel:+46406060823">040-606 08 23</a>
+          </div>
+        </div>
+        <nav class="footer-nav" aria-label="Sidfotslänkar">
+          <a href="/">Hem</a>
+          <a href="om-oss.html">Om oss</a>
+          <a href="verksamheter.html">Verksamheter</a>
+          <a href="nyheter.html">Nyheter</a>
+          <a href="for-oss-i-huset.html">För oss i huset</a>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">Copyright &copy; 2026 Föreningshuset, Ystad. Alla rättigheter förbehållna.</p>
+        <p class="footer-sub">Tidigare KFUM-huset · En del av <a href="https://sommarteaternystad.com">Sommarteatern Ystad</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/tenant-api.js"></script>
+  <script src="js/public-news.js"></script>
+  <script>fhInitPublicNews();</script>
+</body>
+</html>

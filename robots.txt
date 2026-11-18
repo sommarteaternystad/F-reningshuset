@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /intranat.html
+Disallow: /boka-lokal.html
+Disallow: /for-oss-i-huset.html
+
+Sitemap: https://föreningshusetystad.se/sitemap.xml
