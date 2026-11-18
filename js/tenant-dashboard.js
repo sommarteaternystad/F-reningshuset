@@ -225,6 +225,13 @@ function fhRenderNews(news) {
     var title = document.createElement('div');
     title.className = 'news-item-title';
     title.textContent = n.rubrik;
+    if (n.internal) {
+      var badge = document.createElement('span');
+      badge.className = 'news-item-badge';
+      badge.textContent = 'Internt';
+      title.appendChild(document.createTextNode(' '));
+      title.appendChild(badge);
+    }
     var date = document.createElement('div');
     date.className = 'news-item-date';
     var dateText = '';
@@ -232,7 +239,7 @@ function fhRenderNews(news) {
       var d = new Date(n.datum);
       if (!isNaN(d.getTime())) dateText = d.toLocaleDateString('sv-SE');
     }
-    date.textContent = dateText;
+    date.textContent = dateText + (n.internal ? ' · syns inte på nyheter.html' : '');
     titleWrap.appendChild(title);
     titleWrap.appendChild(date);
 

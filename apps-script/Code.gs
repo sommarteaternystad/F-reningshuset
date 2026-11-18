@@ -41,11 +41,18 @@
       av skriptet längre.)
 
    6. "Nyheter"
-      Datum | Rubrik | Text
+      Datum | Rubrik | Text | Synlighet
       (fyller DU i manuellt — en rad per nyhet. Nyaste rad visas
-      överst. Syns dels för alla inloggade föreningar under Nyheter
-      på intranat.html, dels publikt och utan inloggning på
-      nyheter.html — samma lista på båda ställena.)
+      överst. Syns för alla inloggade föreningar under Nyheter på
+      intranat.html.
+
+      Synlighet-kolumnen styr om nyheten ÄVEN syns publikt och utan
+      inloggning på nyheter.html:
+        • Tom, eller "Publik"  → syns på nyheter.html (standard).
+        • "Internt"            → syns bara på intranat.html, inte
+                                  publikt. Intranätet visar en liten
+                                  "Internt"-märkning på sådana rader
+                                  så det är tydligt där också.)
 
    7. "Avvikelser"
       Datum | Förening | Beskrivning | Bildlänk | Status
@@ -74,7 +81,7 @@ function doPost(e) {
   if (action === 'toggleTask') return toggleTask_(body.token, body.task);
   if (action === 'submitContent') return submitContent_(body.token, body.type, body.text, body.imageBase64, body.imageName);
   if (action === 'reportDeviation') return reportDeviation_(body.token, body.text, body.imageBase64, body.imageName);
-  if (action === 'getNews') return jsonOut_({ ok: true, news: readNews_() });
+  if (action === 'getNews') return jsonOut_({ ok: true, news: readNews_(true) });
 
   return jsonOut_({ ok: false, error: 'Okänd åtgärd' });
 }
@@ -147,7 +154,7 @@ function getDashboard_(token) {
     });
   }
 
-  var news = readNews_();
+  var news = readNews_(false);
 
   var deviations = [];
   try {
@@ -264,16 +271,27 @@ function reportDeviation_(token, text, imageBase64, imageName) {
   return jsonOut_({ ok: true });
 }
 
-/* ── Nyheter (publikt, ingen inloggning krävs) ────────────────── */
+/* ── Nyheter ──────────────────────────────────────────────────── */
 
-function readNews_() {
+// publicOnly=true (nyheter.html): hoppar över rader märkta "Internt".
+// publicOnly=false (intranat.html): alla rader, med internal-flagga
+// så gränssnittet kan märka ut vilka som INTE syns publikt.
+function readNews_(publicOnly) {
   var news = [];
   try {
     var newsRows = getSheet_('Nyheter').getDataRange().getValues();
     for (var n = 1; n < newsRows.length; n++) {
       var rubrik = String(newsRows[n][1] || '').trim();
       if (!rubrik) continue;
-      news.push({ datum: newsRows[n][0], rubrik: rubrik, text: String(newsRows[n][2] || '').trim() });
+      var synlighet = String(newsRows[n][3] || '').trim().toLowerCase();
+      var isInternal = synlighet.indexOf('internt') !== -1 || synlighet.indexOf('intern') !== -1;
+      if (publicOnly && isInternal) continue;
+      news.push({
+        datum: newsRows[n][0],
+        rubrik: rubrik,
+        text: String(newsRows[n][2] || '').trim(),
+        internal: isInternal
+      });
     }
     news.sort(function (a, b) { return new Date(b.datum) - new Date(a.datum); });
   } catch (err) {
